@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HoverHackathon</string>
+    <string name="title">Utility Bills</string>
+    <string name="banks_sacco"><![CDATA[Banks & Sacco]]></string>
+    <string name="county">County Services</string>
+    <string name="gvt">Government Services</string>
+    <string name="promotional">Manage Promotional Content</string>
+</resources>
