@@ -5,4 +5,18 @@
     <string name="county">County Services</string>
     <string name="gvt">Government Services</string>
     <string name="promotional">Manage Promotional Content</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kplc">KPLC Prepaid</string>
+    <string name="dstv">DSTV</string>
+    <string name="zuku">Zuku</string>
+    <string name="go_tv">GoTV</string>
+    <string name="start_times">Star Times</string>
+    <string name="rent">Rent</string>
+
+    <string name="paybill_prompt">Recently paid bill(s)</string>
+    <string name="cancel">Cancel</string>
+    <string name="proceed">Proceed</string>
+    <string name="pay">Pay</string>
 </resources>

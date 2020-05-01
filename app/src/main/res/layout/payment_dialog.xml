@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:elevation="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_7sdp"
+            android:orientation="vertical">
+
+    <TextView
+      android:layout_margin="@dimen/_7sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bill Name"
+        android:id="@+id/bill_name"
+        android:textSize="18sp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_7sdp"
+        android:id="@+id/paybill"
+        android:background="@drawable/border"
+        android:textColorHint="@android:color/black"
+        android:hint="Enter Paybill"
+        android:padding="@dimen/_7sdp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_7sdp"
+        android:background="@drawable/border"
+        android:id="@+id/account_no"
+        android:textColorHint="@android:color/black"
+        android:hint="Enter Account Number"
+        android:padding="@dimen/_7sdp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_7sdp"
+        android:background="@drawable/border"
+        android:textColorHint="@android:color/black"
+        android:hint="Enter Amount"
+        android:id="@+id/number"
+        android:inputType="number"
+        android:padding="@dimen/_7sdp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textAllCaps="false"
+            android:layout_margin="@dimen/_7sdp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/darker_gray"
+            android:text="@string/cancel"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:id="@+id/pay"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_margin="@dimen/_7sdp"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/pay"/>
+
+
+    </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

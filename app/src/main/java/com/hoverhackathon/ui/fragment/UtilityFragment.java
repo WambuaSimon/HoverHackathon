@@ -1,0 +1,147 @@
+package com.hoverhackathon.ui.fragment;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.hoverhackathon.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class UtilityFragment extends Fragment {
+    CardView kplc,dstv,zuku,gotv,star,rent;
+    View view;
+
+    public UtilityFragment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_utility, container, false);
+        init();
+        return view;
+    }
+
+    void init() {
+        kplc = view.findViewById(R.id.kplc);
+        kplc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("KPLC Prepaid");
+            }
+        });
+
+        dstv = view.findViewById(R.id.dstv);
+        dstv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("DSTV");
+            }
+        });
+
+        zuku = view.findViewById(R.id.zuku);
+        zuku.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("Zuku");
+            }
+        });
+
+        gotv = view.findViewById(R.id.gotv);
+        gotv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("GOTV");
+            }
+        });
+
+        star = view.findViewById(R.id.star);
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("Star Times");
+            }
+        });
+
+        rent = view.findViewById(R.id.rent);
+        rent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("Rent");
+            }
+        });
+    }
+
+
+    void payDialog(String billName) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.payment_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+
+        final EditText paybill, account_no, number;
+        Button pay, cancel;
+
+        TextView bill_name = dialogView.findViewById(R.id.bill_name);
+        bill_name.setText(billName);
+        paybill = dialogView.findViewById(R.id.paybill);
+        account_no = dialogView.findViewById(R.id.account_no);
+        number = dialogView.findViewById(R.id.number);
+        pay = dialogView.findViewById(R.id.pay);
+        cancel = dialogView.findViewById(R.id.cancel);
+
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (paybill.getText().toString().isEmpty()) {
+                    paybill.setError("Enter Paybill");
+                } else {
+                    paybill.setError(null);
+                }
+                if (account_no.getText().toString().isEmpty()) {
+                    account_no.setError("Enter Paybill");
+                } else {
+                    account_no.setError(null);
+                }
+                if (number.getText().toString().isEmpty()) {
+                    number.setError("Enter Paybill");
+                } else {
+                    number.setError(null);
+                }
+
+                /*TODO: HOVER STUFF GOES HERE*/
+
+//                alertDialog.dismiss();
+
+            }
+        });
+
+        alertDialog.show();
+    }
+}
