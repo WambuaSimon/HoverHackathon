@@ -23,4 +23,8 @@
     <string name="kcb">KCB Bank</string>
     <string name="equity">Equity Bank</string>
     <string name="stan">Standard Chartered Bank</string>
+    <string name="ectitizen">eCitizen</string>
+    <string name="nhif">NHIF</string>
+    <string name="nssf">NSSF</string>
+    <string name="helb">Helb</string>
 </resources>
