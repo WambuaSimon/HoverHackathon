@@ -19,4 +19,8 @@
     <string name="cancel">Cancel</string>
     <string name="proceed">Proceed</string>
     <string name="pay">Pay</string>
+    <string name="im"><![CDATA[I&M Bank]]></string>
+    <string name="kcb">KCB Bank</string>
+    <string name="equity">Equity Bank</string>
+    <string name="stan">Standard Chartered Bank</string>
 </resources>

@@ -11,17 +11,33 @@ import android.widget.Button;
 import com.hoverhackathon.R;
 
 public class DashboardActivity extends AppCompatActivity {
-CardView utility;
+CardView utility,banks_sacco,county;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        county = findViewById(R.id.county);
         utility = findViewById(R.id.utility);
+        banks_sacco = findViewById(R.id.banks_sacco);
         utility.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),ActivityUtility.class);
+                startActivity(intent);
+            }
+        });
+        banks_sacco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ActivityBanksSaccos.class);
+                startActivity(intent);
+            }
+        });
+        county.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ActivityCountyServices.class);
                 startActivity(intent);
             }
         });

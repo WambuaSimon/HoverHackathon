@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_7sdp"
         android:id="@+id/paybill"
+        android:inputType="number"
         android:background="@drawable/border"
         android:textColorHint="@android:color/black"
         android:hint="Enter Paybill"

@@ -7,28 +7,26 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.hoverhackathon.R;
-import com.hoverhackathon.ui.fragment.UtilityFragment;
+import com.hoverhackathon.ui.fragment.BanksSaccosFragment;
 
-public class ActivityUtility extends AppCompatActivity {
+public class ActivityBanksSaccos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_utility);
+        setContentView(R.layout.activity_banks_saccos);
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setTitle("Select Utility");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        UtilityFragment utilityFragment = new UtilityFragment();
-        startFragment(utilityFragment);
+        BanksSaccosFragment banksSaccosFragment = new BanksSaccosFragment();
+        startFragment(banksSaccosFragment);
 
     }
     public void startFragment(Fragment fragment) {
         getSupportFragmentManager()
-                .beginTransaction().replace(R.id.utility_fragment_container, fragment)
+                .beginTransaction().replace(R.id.banks_fragment_container, fragment)
                 .commit();
     }
 }
