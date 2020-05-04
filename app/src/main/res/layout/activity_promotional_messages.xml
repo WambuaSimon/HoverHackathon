@@ -13,7 +13,6 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -22,14 +21,15 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deposit Money to Bank/Sacco"
+
+            android:text="Select services to unsubscribe"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/banks_fragment_container"
+        android:id="@+id/messages_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:isScrollContainer="true"

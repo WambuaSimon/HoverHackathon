@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:layout_width="match_parent"
+    android:gravity="center"
+
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_weight="0.03"
+        android:id="@+id/color"
+        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_gravity="start"
+        />
+
+    <TextView
+        android:id="@+id/messageNumber"
+        android:layout_width="0dp"
+        android:layout_weight="0.7"
+        android:layout_height="60dp"
+
+        android:fontFamily="@font/alice"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="Message Address"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_18sdp" />
+
+    <it.emperor.animatedcheckbox.AnimatedCheckBox
+        android:id="@+id/check"
+        android:layout_width="0dp"
+android:layout_weight="0.3"
+        android:layout_height="60dp"
+        app:acb_animation_duration="500"
+        app:acb_border_checked_color="#f00"
+        app:acb_border_checked_stroke_width="2dp"
+        app:acb_border_not_checked_color="@color/colorAccent"
+
+        app:acb_hook_color="@android:color/white"
+
+        app:acb_circle_color="#f00"
+
+        app:acb_hook_stroke_width="2dp"
+        app:acb_padding="10dp" />
+
+</LinearLayout>
