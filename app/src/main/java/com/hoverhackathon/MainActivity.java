@@ -2,6 +2,7 @@ package com.hoverhackathon;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,7 +14,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialogInbox;
     private CustomHandler customHandler;
     int REQUEST_CODE_ASK_PERMISSIONS = 100;
-
+Button proceed;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{"android.permission.READ_SMS"}, REQUEST_CODE_ASK_PERMISSIONS);
         }
-
-
     }
 
     @Override
@@ -59,8 +61,24 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recordsStored = new ArrayList<Message>();
 
-        messageList = (ListView) findViewById(R.id.messageList);
+        messageList = findViewById(R.id.messageList);
+        proceed =  findViewById(R.id.proceed);
         populateMessageList();
+        proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int m=0;m<recordsStored.size();m++){
+                    if(recordsStored.get(m).isChecked){
+                        String number = recordsStored.get(m).messageNumber;
+                        Log.d("recordsStored",number);
+                    }
+
+                }
+
+
+            }
+        });
+
     }
 
     public void populateMessageList() {

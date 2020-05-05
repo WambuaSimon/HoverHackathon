@@ -76,6 +76,7 @@ public class MessageListAdapter extends BaseAdapter {
         holder.check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean b) {
+
                 if (checkMaxLimit()) {
 
 
@@ -101,19 +102,6 @@ public class MessageListAdapter extends BaseAdapter {
 
 
         });
-//        holder.check.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (holder.check.isChecked()==true){
-//                    holder.check.setChecked(false);
-//
-//                }else if(holder.check.isChecked()==false){
-//                    holder.check.setChecked(true);
-//                    Toast.makeText(ctx, ""+message.getMessageNumber(), Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
 
         return convertView1;
     }
