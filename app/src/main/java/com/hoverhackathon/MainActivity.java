@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         customHandler = new CustomHandler(this);
         progressDialogInbox = new ProgressDialog(MainActivity.this);
-
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recordsStored = new ArrayList<Message>();
 
         messageList = (ListView) findViewById(R.id.messageList);

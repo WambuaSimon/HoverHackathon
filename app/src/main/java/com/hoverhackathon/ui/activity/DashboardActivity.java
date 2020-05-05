@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.hoverhackathon.MainActivity;
 import com.hoverhackathon.R;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -53,7 +54,7 @@ CardView utility,banks_sacco,county,gvt,promo;
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ActivityPromotionalMessages.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hoverhackathon.Message;
 import com.hoverhackathon.R;
 import com.hoverhackathon.model.PromotionalMessagesModel;
 
@@ -129,5 +130,10 @@ public class PromotionalMessagesAdapter extends RecyclerView.Adapter<Promotional
     public interface PromotionalMessagesAdapterListener {
         void onMessageModelSelected(PromotionalMessagesModel message);
         void onMessageModelUnSelected(PromotionalMessagesModel message);
+    }
+
+    public void setArrayList(List<PromotionalMessagesModel> messageList) {
+        this.messagesModelList = messageList;
+        notifyDataSetChanged();
     }
 }

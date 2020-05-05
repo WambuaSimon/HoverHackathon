@@ -3,6 +3,9 @@ package com.hoverhackathon.model;
 public class PromotionalMessagesModel {
     String messageNumber, messageContent,messageAddress;
 
+    public PromotionalMessagesModel() {
+    }
+
     public PromotionalMessagesModel(String messageNumber) {
         this.messageNumber = messageNumber;
     }

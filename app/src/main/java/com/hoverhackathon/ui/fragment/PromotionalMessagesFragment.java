@@ -1,8 +1,10 @@
 package com.hoverhackathon.ui.fragment;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hoverhackathon.MainActivity;
 import com.hoverhackathon.R;
 import com.hoverhackathon.adapter.PromotionalMessagesAdapter;
 import com.hoverhackathon.model.PromotionalMessagesModel;
@@ -26,10 +29,11 @@ import java.util.List;
 public class PromotionalMessagesFragment extends Fragment implements PromotionalMessagesAdapter.PromotionalMessagesAdapterListener {
     private RecyclerView recyclerView;
     private List<PromotionalMessagesModel> messagesModelList = new ArrayList<>();
+    private List<PromotionalMessagesModel> messagesModelListStored = new ArrayList<>();
     private PromotionalMessagesAdapter adapter;
     private SearchView searchView;
     View view;
-
+    int REQUEST_CODE_ASK_PERMISSIONS = 100;
     public PromotionalMessagesFragment() {
         // Required empty public constructor
     }
@@ -40,8 +44,24 @@ public class PromotionalMessagesFragment extends Fragment implements Promotional
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_promotional_messages, container, false);
+
+        if (ContextCompat.checkSelfPermission(getActivity(), "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+            initViews();
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{"android.permission.READ_SMS"}, REQUEST_CODE_ASK_PERMISSIONS);
+        }
+
+
+        addData();
+
+        return view;
+    }
+
+    void initViews(){
         recyclerView = view.findViewById(R.id.recyclerview);
         messagesModelList = new ArrayList<>();
+        messagesModelListStored = new ArrayList<>();
         adapter = new PromotionalMessagesAdapter(getActivity(), messagesModelList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -52,10 +72,6 @@ public class PromotionalMessagesFragment extends Fragment implements Promotional
         recyclerView.addItemDecoration(itemDecorator);
 
         recyclerView.setAdapter(adapter);
-
-        addData();
-
-        return view;
     }
 
     @Override
