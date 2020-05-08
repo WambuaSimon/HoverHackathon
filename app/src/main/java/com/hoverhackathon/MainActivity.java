@@ -3,37 +3,49 @@ package com.hoverhackathon;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.List;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.hoverhackathon.DB.AppDatabase;
+
 public class MainActivity extends AppCompatActivity {
     private static final int TYPE_INCOMING_MESSAGE = 1;
     private ListView messageList;
     private MessageListAdapter messageListAdapter;
-    private ArrayList<Message> recordsStored;
-    private ArrayList<Message> listInboxMessages;
-    private ProgressDialog progressDialogInbox;
+    private List<Message> recordsStored;
+    private List<Message> listInboxMessages;
+
     private CustomHandler customHandler;
     int REQUEST_CODE_ASK_PERMISSIONS = 100;
-Button proceed;
+    Button proceed;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,50 +67,54 @@ Button proceed;
 
     private void initViews() {
         customHandler = new CustomHandler(this);
-        progressDialogInbox = new ProgressDialog(MainActivity.this);
+
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        recordsStored = new ArrayList<Message>();
+        recordsStored = new ArrayList<>();
 
         messageList = findViewById(R.id.messageList);
-        proceed =  findViewById(R.id.proceed);
+        proceed = findViewById(R.id.proceed);
         populateMessageList();
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int m=0;m<recordsStored.size();m++){
-                    if(recordsStored.get(m).isChecked){
+                for (int m = 0; m < recordsStored.size(); m++) {
+                    if (recordsStored.get(m).isChecked) {
                         String number = recordsStored.get(m).messageNumber;
-                        Log.d("recordsStored",number);
+                        Log.d("recordsStored", number);
                     }
 
                 }
-
+                /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
 
             }
         });
 
     }
 
+
+
+
     public void populateMessageList() {
         fetchInboxMessages();
+
+        /*TODO: only show addresses saved in ROOM DB*/
+        /*TODO: store numbers/address and status to ROOM*/
+        /*TODO: check if such numbers have been unsubscribed by checking status flag in ROOM*/
+        /*TODO: if status==1, it's been here before so don't store, else, store with status==0*/
+        /*TODO: only fetch with status==0, put in array list and pass to list adapter*/
 
         messageListAdapter = new MessageListAdapter(this,
                 R.layout.message_list_item, recordsStored);
         messageList.setAdapter(messageListAdapter);
+
     }
 
-    private void showProgressDialog(String message) {
-        progressDialogInbox.setMessage(message);
-        progressDialogInbox.setIndeterminate(true);
-        progressDialogInbox.setCancelable(true);
-        progressDialogInbox.show();
-    }
 
     private void fetchInboxMessages() {
         if (listInboxMessages == null) {
-            showProgressDialog("Fetching Inbox Messages...");
+
             startThread();
         } else {
             // messageType = TYPE_INCOMING_MESSAGE;
@@ -126,8 +142,8 @@ Button proceed;
 
     }
 
-    public ArrayList<Message> fetchInboxSms(int type) {
-        ArrayList<Message> smsInbox = new ArrayList<Message>();
+    public List<Message> fetchInboxSms(int type) {
+        List<Message> smsInbox = new ArrayList<>();
 
         Uri uriSms = Uri.parse("content://sms");
 
@@ -142,7 +158,7 @@ Button proceed;
 
                 do {
 
-                    Message message = new Message();
+                    final Message message = new Message();
                     message.messageNumber = cursor.getString(cursor
                             .getColumnIndex("address"));
                     if (!message.messageNumber.equalsIgnoreCase("Safaricom") &&
@@ -153,7 +169,7 @@ Button proceed;
                             !message.messageNumber.equalsIgnoreCase("iandmbank") &&
                             !message.messageNumber.equalsIgnoreCase("safhome") &&
                             !message.messageNumber.equalsIgnoreCase("authmsg") &&
-                            !message.messageNumber.equalsIgnoreCase("google") &&
+                            !message.messageNumber.equalsIgnoreCase("google")&&
                             message.messageNumber.length() < 10) {
 
                         smsInbox.add(message);
@@ -207,7 +223,7 @@ Button proceed;
 
                 inboxListActivity.messageListAdapter
                         .setArrayList(inboxListActivity.recordsStored);
-                inboxListActivity.progressDialogInbox.dismiss();
+
             }
         }
     }
@@ -224,12 +240,12 @@ Button proceed;
     @Override
     protected void onPause() {
         super.onPause();
-        progressDialogInbox.dismiss();
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        progressDialogInbox.dismiss();
+
     }
 }

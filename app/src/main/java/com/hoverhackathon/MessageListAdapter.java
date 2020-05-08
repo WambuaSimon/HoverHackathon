@@ -1,6 +1,7 @@
 package com.hoverhackathon;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import android.content.Context;
@@ -20,10 +21,10 @@ import it.emperor.animatedcheckbox.AnimatedCheckBox;
 
 public class MessageListAdapter extends BaseAdapter {
     private Context ctx;
-    public ArrayList<Message> messageListArray;
+    public List<Message> messageListArray;
     boolean[] mCheckedState;
     public MessageListAdapter(Context context, int textViewResourceId,
-                              ArrayList<Message> messageListArray) {
+                              List<Message> messageListArray) {
 //        super(context, textViewResourceId);
         this.messageListArray = messageListArray;
         this.ctx = context;
@@ -51,7 +52,7 @@ public class MessageListAdapter extends BaseAdapter {
         }
         final Message message = getItem(position);
 
-        holder.messageTo.setText(message.messageNumber + " : ");
+        holder.messageTo.setText(message.messageNumber + "  ");
 
         /*generate random color*/
         Random r = new Random();
@@ -113,7 +114,7 @@ public class MessageListAdapter extends BaseAdapter {
                 countermax++;
             }
         }
-        return countermax >= 5;
+        return countermax >= 100;
     }
 
     @Override
@@ -131,7 +132,7 @@ public class MessageListAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void setArrayList(ArrayList<Message> messageList) {
+    public void setArrayList(List<Message> messageList) {
         this.messageListArray = messageList;
         notifyDataSetChanged();
     }

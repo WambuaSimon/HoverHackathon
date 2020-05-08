@@ -1,54 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <LinearLayout android:layout_height="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
 
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:orientation="vertical">
 
-        <LinearLayout android:layout_height="wrap_content"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_15sdp"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/kplc"
-                android:elevation="@dimen/_10sdp"
-                android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:layout_weight="0.5"
+                android:elevation="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        app:srcCompat="@drawable/kplc"
+                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
-                        />
+                        app:srcCompat="@drawable/kplc" />
 
                     <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="@string/kplc"
-                        android:textSize="18sp"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -56,81 +53,75 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/dstv"
-                android:layout_weight="0.5"
-                android:elevation="@dimen/_10sdp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:layout_weight="0.5"
+                android:elevation="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        app:srcCompat="@drawable/dstv"
+                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
-                        />
+                        app:srcCompat="@drawable/dstv" />
 
                     <TextView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/dstv"
-                        android:textSize="18sp"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/dstv"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <LinearLayout android:layout_height="wrap_content"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
 
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_marginTop="@dimen/_15sdp"
+
                 android:id="@+id/zuku"
-                android:elevation="@dimen/_10sdp"
-                android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:layout_weight="0.5"
+                android:elevation="@dimen/_10sdp">
 
                 <LinearLayout
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        app:srcCompat="@drawable/zuku"
+                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
-                        />
+                        app:srcCompat="@drawable/zuku" />
 
                     <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="@string/zuku"
-                        android:textSize="18sp"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -138,37 +129,33 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/gotv"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_weight="0.5"
-                android:elevation="@dimen/_10sdp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:layout_weight="0.5"
+                android:elevation="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        app:srcCompat="@drawable/gotv"
+                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
-                        />
+                        app:srcCompat="@drawable/gotv" />
 
                     <TextView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/go_tv"
-                        android:textSize="18sp"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/go_tv"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -176,45 +163,41 @@
         </LinearLayout>
 
 
-        <LinearLayout android:layout_height="wrap_content"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
 
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_marginTop="@dimen/_15sdp"
                 android:id="@+id/star"
-                android:elevation="@dimen/_10sdp"
-                android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:layout_weight="0.5"
+                android:elevation="@dimen/_10sdp">
 
                 <LinearLayout
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        app:srcCompat="@drawable/star"
+                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
-                        />
+                        app:srcCompat="@drawable/star" />
 
                     <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="@string/start_times"
-                        android:textSize="18sp"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -222,44 +205,169 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/rent"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_weight="0.5"
-                android:elevation="@dimen/_10sdp"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="0.5"
+                android:elevation="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
-                        app:srcCompat="@drawable/home"
+                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
-                        />
+                        app:srcCompat="@drawable/home" />
 
                     <TextView
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/rent"
-                        android:textSize="18sp"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/rent"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+
         </LinearLayout>
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_10sdp">
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/ticketing"
+                    android:textColor="@android:color/white"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textSize="18sp" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="center_horizontal"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/sgr" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/sgr"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="center_horizontal"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/buupass" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/buupass"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+            android:elevation="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="0.5"
+                    android:text="@string/bonga"
+                    android:layout_gravity="center_horizontal"
+android:layout_marginStart="8dp"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    app:srcCompat="@drawable/bonga" />
+
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+
+                    app:srcCompat="@drawable/arror" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </ScrollView>
