@@ -124,9 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class FetchMessageThread extends Thread {
-
         public int tag = -1;
-
         public FetchMessageThread(int tag) {
             this.tag = tag;
         }
@@ -173,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                             message.messageNumber.length() < 10) {
 
                         smsInbox.add(message);
+
                     }
 
                 } while (cursor.moveToNext());

@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hoverhackathon.R;
 
@@ -20,7 +22,8 @@ import com.hoverhackathon.R;
  * A simple {@link Fragment} subclass.
  */
 public class UtilityFragment extends Fragment {
-    CardView kplc,dstv,zuku,gotv,star,rent;
+    CardView kplc,dstv,zuku,gotv,star,rent,bonga;
+    LinearLayout sgr,buupass;
     View view;
 
     public UtilityFragment() {
@@ -85,6 +88,30 @@ public class UtilityFragment extends Fragment {
                 payDialog("Rent");
             }
         });
+
+        sgr = view.findViewById(R.id.sgr);
+        sgr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("Madaraka Express");
+            }
+        });
+
+        buupass = view.findViewById(R.id.buupass);
+        buupass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("BuuPass");
+            }
+        });
+
+        bonga = view.findViewById(R.id.bonga);
+        bonga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Proceed with pay with bonga", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -96,12 +123,11 @@ public class UtilityFragment extends Fragment {
         dialogBuilder.setView(dialogView);
 
 
-        final EditText paybill, account_no, number;
+        final EditText account_no, number;
         Button pay, cancel;
 
         TextView bill_name = dialogView.findViewById(R.id.bill_name);
         bill_name.setText(billName);
-        paybill = dialogView.findViewById(R.id.paybill);
         account_no = dialogView.findViewById(R.id.account_no);
         number = dialogView.findViewById(R.id.number);
         pay = dialogView.findViewById(R.id.pay);
@@ -119,11 +145,6 @@ public class UtilityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (paybill.getText().toString().isEmpty()) {
-                    paybill.setError("Enter Paybill");
-                } else {
-                    paybill.setError(null);
-                }
                 if (account_no.getText().toString().isEmpty()) {
                     account_no.setError("Enter Paybill");
                 } else {

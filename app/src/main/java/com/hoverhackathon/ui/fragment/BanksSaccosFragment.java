@@ -20,7 +20,7 @@ import com.hoverhackathon.R;
  */
 public class BanksSaccosFragment extends Fragment {
     View view;
-    CardView im, kcb, equity, stan;
+    CardView im, kcb, equity, stan,sheria,stima;
 
     public BanksSaccosFragment() {
         // Required empty public constructor
@@ -41,6 +41,8 @@ public class BanksSaccosFragment extends Fragment {
         kcb = view.findViewById(R.id.kcb);
         equity = view.findViewById(R.id.equity);
         stan = view.findViewById(R.id.stan);
+        sheria = view.findViewById(R.id.sheria);
+        stima = view.findViewById(R.id.stima);
 
         im.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +68,18 @@ public class BanksSaccosFragment extends Fragment {
                 payDialog("Standard Chartered Bank");
             }
         });
+        sheria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("Sheria Sacco");
+            }
+        });
+        stima.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDialog("Stima Sacco");
+            }
+        });
     }
 
     void payDialog(String billName) {
@@ -76,12 +90,12 @@ public class BanksSaccosFragment extends Fragment {
         dialogBuilder.setView(dialogView);
 
 
-        final EditText paybill, account_no, number;
+        final EditText account_no, number;
         Button pay, cancel;
 
         TextView bill_name = dialogView.findViewById(R.id.bill_name);
         bill_name.setText(billName);
-        paybill = dialogView.findViewById(R.id.paybill);
+
         account_no = dialogView.findViewById(R.id.account_no);
         number = dialogView.findViewById(R.id.number);
         pay = dialogView.findViewById(R.id.pay);
@@ -99,18 +113,13 @@ public class BanksSaccosFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (paybill.getText().toString().isEmpty()) {
-                    paybill.setError("Enter Paybill");
-                } else {
-                    paybill.setError(null);
-                }
                 if (account_no.getText().toString().isEmpty()) {
-                    account_no.setError("Enter Paybill");
+                    account_no.setError("Enter Account Number");
                 } else {
                     account_no.setError(null);
                 }
                 if (number.getText().toString().isEmpty()) {
-                    number.setError("Enter Paybill");
+                    number.setError("Enter Amount");
                 } else {
                     number.setError(null);
                 }

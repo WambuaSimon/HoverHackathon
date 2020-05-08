@@ -31,4 +31,7 @@
     <string name="sgr">Madaraka Express</string>
     <string name="buupass">BuuPass</string>
     <string name="bonga">Pay with Bonga</string>
+    <string name="sheria">Sheria Sacco</string>
+    <string name="stima">Stima Sacco</string>
+    <string name="spinner_title">Select Service</string>
 </resources>

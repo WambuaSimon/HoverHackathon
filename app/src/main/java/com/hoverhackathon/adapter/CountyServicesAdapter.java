@@ -69,42 +69,23 @@ public class CountyServicesAdapter extends RecyclerView.Adapter<CountyServicesAd
 
         String countyNameValue =county.getCountyName();
         holder.countyName.setText(county.getCountyName());
-       if(countyNameValue.equalsIgnoreCase("Kiambu")){
+
+       if(countyNameValue.equalsIgnoreCase("Kiambu County")){
            holder.countyLogo.setImageResource(R.drawable.kiambu);
-       }else if(countyNameValue.equalsIgnoreCase("Nyeri")){
+       }else if(countyNameValue.equalsIgnoreCase("Nyeri County")){
            holder.countyLogo.setImageResource(R.drawable.nyeri);
        }
-       else if(countyNameValue.equalsIgnoreCase("Mombasa")){
+       else if(countyNameValue.equalsIgnoreCase("Mombasa County")){
            holder.countyLogo.setImageResource(R.drawable.msa);
        }
-       else if(countyNameValue.equalsIgnoreCase("Embu")){
-           holder.countyLogo.setImageResource(R.drawable.embu);
-       }
-       else if(countyNameValue.equalsIgnoreCase("Meru")){
-           holder.countyLogo.setImageResource(R.drawable.meru);
-       }
-       else if(countyNameValue.equalsIgnoreCase("Tharaka-Nithi")){
-           holder.countyLogo.setImageResource(R.drawable.tharaka);
-       }
-       else if(countyNameValue.equalsIgnoreCase("Kajiado")){
-           holder.countyLogo.setImageResource(R.drawable.kajiado);
-       }
-       else if(countyNameValue.equalsIgnoreCase("Kericho")){
-           holder.countyLogo.setImageResource(R.drawable.kericho);
-       }
-       else if(countyNameValue.equalsIgnoreCase("Laikipia")){
-           holder.countyLogo.setImageResource(R.drawable.laikipia);
-       }
-       else if(countyNameValue.equalsIgnoreCase("Nakuru")){
+
+       else if(countyNameValue.equalsIgnoreCase("Nakuru County")){
            holder.countyLogo.setImageResource(R.drawable.nakuru);
        }
-       else if(countyNameValue.equalsIgnoreCase("Trans-Nzoia")){
-           holder.countyLogo.setImageResource(R.drawable.trans);
-       }
-       else if(countyNameValue.equalsIgnoreCase("Kakamega")){
+       else if(countyNameValue.equalsIgnoreCase("Kakamega County")){
            holder.countyLogo.setImageResource(R.drawable.kakamega);
        }
-       else if(countyNameValue.equalsIgnoreCase("Nairobi")){
+       else if(countyNameValue.equalsIgnoreCase("Nairobi County")){
            holder.countyLogo.setImageResource(R.drawable.nrb);
        }
 

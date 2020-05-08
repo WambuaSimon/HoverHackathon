@@ -28,16 +28,17 @@
         />
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_7sdp"
-        android:id="@+id/paybill"
-        android:inputType="number"
-        android:background="@drawable/border"
-        android:textColorHint="@android:color/black"
-        android:hint="Enter Paybill"
-        android:padding="@dimen/_7sdp" />
+<!--    <EditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="@dimen/_7sdp"-->
+<!--        android:id="@+id/paybill"-->
+<!--        android:inputType="number"-->
+<!--        android:background="@drawable/border"-->
+<!--        android:textColorHint="@android:color/black"-->
+<!--        android:hint="Enter Paybill"-->
+<!--        android:padding="@dimen/_7sdp" />-->
+
 
     <EditText
         android:layout_width="match_parent"
@@ -86,7 +87,7 @@
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             android:backgroundTint="@color/colorAccent"
-            android:text="@string/pay"/>
+            android:text="@string/proceed"/>
 
 
     </LinearLayout>

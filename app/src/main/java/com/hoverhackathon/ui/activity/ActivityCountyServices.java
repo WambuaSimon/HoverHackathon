@@ -16,8 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hoverhackathon.R;
@@ -27,11 +30,13 @@ import com.hoverhackathon.model.CountyModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityCountyServices extends AppCompatActivity implements CountyServicesAdapter.CountyServicesAdapterListener {
+public class ActivityCountyServices extends AppCompatActivity implements CountyServicesAdapter.CountyServicesAdapterListener, AdapterView.OnItemSelectedListener {
     RecyclerView recyclerView;
     List<CountyModel> countyModelList;
     CountyServicesAdapter adapter;
     SearchView searchView;
+      Spinner spinner;
+      EditText plate_no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,6 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
     }
 
 
-
     void DisplayCounties() {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -67,35 +71,22 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
     }
 
     void AddCounty() {
-        CountyModel nrb = new CountyModel("Nairobi");
+        CountyModel nrb = new CountyModel("Nairobi County");
         countyModelList.add(nrb);
-        CountyModel kiambu = new CountyModel("Kiambu");
+        CountyModel kiambu = new CountyModel("Kiambu County");
         countyModelList.add(kiambu);
-        CountyModel nyeri = new CountyModel("Nyeri");
+        CountyModel nyeri = new CountyModel("Nyeri County");
         countyModelList.add(nyeri);
-        CountyModel msa = new CountyModel("Mombasa");
+        CountyModel msa = new CountyModel("Mombasa County");
         countyModelList.add(msa);
-        CountyModel embu = new CountyModel("Embu");
-        countyModelList.add(embu);
-        CountyModel meru = new CountyModel("Meru");
-        countyModelList.add(meru);
-        CountyModel tharaka = new CountyModel("Tharaka-Nithi");
-        countyModelList.add(tharaka);
-        CountyModel kajiado = new CountyModel("Kajiado");
-        countyModelList.add(kajiado);
-        CountyModel kericho = new CountyModel("Kericho");
-        countyModelList.add(kericho);
-        CountyModel laikipia = new CountyModel("Laikipia");
-        countyModelList.add(laikipia);
-        CountyModel nakuru = new CountyModel("Nakuru");
+        CountyModel nakuru = new CountyModel("Nakuru County");
         countyModelList.add(nakuru);
-        CountyModel trans = new CountyModel("Trans-Nzoia");
-        countyModelList.add(trans);
-        CountyModel kakamega = new CountyModel("Kakamega");
+        CountyModel kakamega = new CountyModel("Kakamega County");
         countyModelList.add(kakamega);
 
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -126,6 +117,7 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
         });
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -161,22 +153,32 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ActivityCountyServices.this);
 
         LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.payment_dialog, null);
+        View dialogView = inflater.inflate(R.layout.dialog_country_layout, null);
         dialogBuilder.setView(dialogView);
 
-
-        final EditText paybill, account_no, number;
+      final  EditText amount;;
         Button pay, cancel;
 
         TextView bill_name = dialogView.findViewById(R.id.bill_name);
         bill_name.setText(county);
-        paybill = dialogView.findViewById(R.id.paybill);
-        account_no = dialogView.findViewById(R.id.account_no);
-        number = dialogView.findViewById(R.id.number);
+
+        spinner = dialogView.findViewById(R.id.spinner);
+        plate_no = dialogView.findViewById(R.id.plate_no);
+        amount = dialogView.findViewById(R.id.amount);
         pay = dialogView.findViewById(R.id.pay);
         cancel = dialogView.findViewById(R.id.cancel);
 
-
+        plate_no.setVisibility(View.GONE);
+        spinner.setOnItemSelectedListener(this);
+        List<String> services = new ArrayList<>();
+        services.add("Select Service");
+        services.add("Parking");
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, services);
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
         final AlertDialog alertDialog = dialogBuilder.create();
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,21 +189,10 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (paybill.getText().toString().isEmpty()) {
-                    paybill.setError("Enter Paybill");
+                if (amount.getText().toString().isEmpty()) {
+                    amount.setError("Enter Amount");
                 } else {
-                    paybill.setError(null);
-                }
-                if (account_no.getText().toString().isEmpty()) {
-                    account_no.setError("Enter Paybill");
-                } else {
-                    account_no.setError(null);
-                }
-                if (number.getText().toString().isEmpty()) {
-                    number.setError("Enter Paybill");
-                } else {
-                    number.setError(null);
+                    amount.setError(null);
                 }
 
                 /*TODO: HOVER STUFF GOES HERE*/
@@ -212,5 +203,22 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
         });
 
         alertDialog.show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String item = parent.getItemAtPosition(position).toString();
+        if(item.equalsIgnoreCase("Parking")){
+            plate_no.setVisibility(View.VISIBLE);
+        }
+        else{
+            plate_no.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

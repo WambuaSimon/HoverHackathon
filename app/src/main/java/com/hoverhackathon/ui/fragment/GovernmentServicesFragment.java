@@ -45,30 +45,30 @@ View view;
         ecitizen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("eCitizen");
+                payDialog("eCitizen","Enter Account Number");
             }
         });
         helb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("Helb");
+                payDialog("Helb","Enter ID Number");
             }
         });
         nhif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("NHIF");
+                payDialog("NHIF","Enter ID/Member Number");
             }
         });
         nssf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("NSSF");
+                payDialog("NSSF","Enter NSSF Number");
             }
         });
     }
 
-    void payDialog(String billName) {
+    void payDialog(String billName,String hint) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -76,13 +76,13 @@ View view;
         dialogBuilder.setView(dialogView);
 
 
-        final EditText paybill, account_no, number;
+        final EditText account_no, number;
         Button pay, cancel;
 
         TextView bill_name = dialogView.findViewById(R.id.bill_name);
         bill_name.setText(billName);
-        paybill = dialogView.findViewById(R.id.paybill);
         account_no = dialogView.findViewById(R.id.account_no);
+        account_no.setHint(hint);
         number = dialogView.findViewById(R.id.number);
         pay = dialogView.findViewById(R.id.pay);
         cancel = dialogView.findViewById(R.id.cancel);
@@ -99,11 +99,6 @@ View view;
             @Override
             public void onClick(View v) {
 
-                if (paybill.getText().toString().isEmpty()) {
-                    paybill.setError("Enter Paybill");
-                } else {
-                    paybill.setError(null);
-                }
                 if (account_no.getText().toString().isEmpty()) {
                     account_no.setError("Enter Paybill");
                 } else {

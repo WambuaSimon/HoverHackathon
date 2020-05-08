@@ -255,13 +255,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="@dimen/_4sdp"
                     android:background="@color/colorPrimary"
+                    android:gravity="center_horizontal"
                     android:text="@string/ticketing"
-                    android:textColor="@android:color/white"
                     android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp" />
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -275,6 +275,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_weight="0.5"
+                        android:id="@+id/sgr"
                         android:orientation="vertical">
 
                         <ImageView
@@ -300,6 +301,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_weight="0.5"
+                        android:id="@+id/buupass"
                         android:orientation="vertical">
 
                         <ImageView
@@ -325,8 +327,10 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
+            android:id="@+id/bonga"
             android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:elevation="@dimen/_10sdp">
 
             <LinearLayout
@@ -342,26 +346,26 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_weight="0.5"
                     android:text="@string/bonga"
-                    android:layout_gravity="center_horizontal"
-android:layout_marginStart="8dp"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:layout_weight="0.4"
                     app:srcCompat="@drawable/bonga" />
 
 
                 <ImageView
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:layout_weight="0.1"
 
                     app:srcCompat="@drawable/arror" />
