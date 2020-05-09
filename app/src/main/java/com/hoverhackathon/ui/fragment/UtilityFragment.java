@@ -1,5 +1,6 @@
 package com.hoverhackathon.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -16,14 +17,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hover.sdk.api.Hover;
+import com.hover.sdk.api.HoverParameters;
+import com.hoverhackathon.DownloadListener;
 import com.hoverhackathon.R;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class UtilityFragment extends Fragment {
-    CardView kplc,dstv,zuku,gotv,star,rent,bonga;
-    LinearLayout sgr,buupass;
+    CardView kplc, dstv, zuku, gotv, star, rent, bonga;
+    LinearLayout sgr, buupass;
     View view;
 
     public UtilityFragment() {
@@ -48,6 +54,9 @@ public class UtilityFragment extends Fragment {
                 payDialog("KPLC Prepaid");
             }
         });
+        DownloadListener xv = new DownloadListener();
+        Hover.initialize(Objects.requireNonNull(getContext()));
+        Hover.updateActionConfigs(xv, Objects.requireNonNull(getContext()));
 
         dstv = view.findViewById(R.id.dstv);
         dstv.setOnClickListener(new View.OnClickListener() {
@@ -110,12 +119,17 @@ public class UtilityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Proceed with pay with bonga", Toast.LENGTH_SHORT).show();
+                Intent payWithBonga = new HoverParameters.Builder(getContext())
+                        //.extra("", "")
+                        .request("def448ba")
+                        .buildIntent();
+                startActivityForResult(payWithBonga, 0);
             }
         });
     }
 
 
-    void payDialog(String billName) {
+    void payDialog(final String billName) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -146,18 +160,48 @@ public class UtilityFragment extends Fragment {
             public void onClick(View v) {
 
                 if (account_no.getText().toString().isEmpty()) {
-                    account_no.setError("Enter Paybill");
+                    account_no.setError("Enter account no.");
                 } else {
                     account_no.setError(null);
                 }
                 if (number.getText().toString().isEmpty()) {
-                    number.setError("Enter Paybill");
+                    number.setError("Enter amount.");
                 } else {
                     number.setError(null);
                 }
 
                 /*TODO: HOVER STUFF GOES HERE*/
+                switch (billName) {
+                    case "KPLC Prepaid":
+                        Intent kplcprepaid = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("afdccceb")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(kplcprepaid, 0);
+                        break;
+                    case "DSTV":
 
+                        break;
+                    case "Zuku":
+
+                        break;
+                    case "GOTV":
+
+                        break;
+                    case "Star Times":
+
+                        break;
+                    case "Rent":
+                        break;
+                    case "Madaraka Express":
+                       break;
+                    case"BuuPass":
+                        break;
+
+                }
 //                alertDialog.dismiss();
 
             }
