@@ -1,5 +1,6 @@
 package com.hoverhackathon.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -13,7 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.hover.sdk.api.Hover;
+import com.hover.sdk.api.HoverParameters;
+import com.hoverhackathon.DownloadListener;
 import com.hoverhackathon.R;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +27,7 @@ import com.hoverhackathon.R;
 public class GovernmentServicesFragment extends Fragment {
     CardView ecitizen, nhif, nssf, helb;
     View view;
+    String accountnumber, amount;
 
     public GovernmentServicesFragment() {
         // Required empty public constructor
@@ -42,6 +49,10 @@ public class GovernmentServicesFragment extends Fragment {
         nhif = view.findViewById(R.id.nhif);
         nssf = view.findViewById(R.id.nssf);
         helb = view.findViewById(R.id.helb);
+        //initialize hover
+        DownloadListener xv = new DownloadListener();
+        Hover.initialize(Objects.requireNonNull(getContext()));
+        Hover.updateActionConfigs(xv, Objects.requireNonNull(getContext()));
 
         ecitizen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +80,7 @@ public class GovernmentServicesFragment extends Fragment {
         });
     }
 
-    void payDialog(String billName, String hint) {
+    void payDialog(final String billName, String hint) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -110,13 +121,58 @@ public class GovernmentServicesFragment extends Fragment {
                 } else {
                     number.setError(null);
                 }
-
+                accountnumber = account_no.getText().toString();
+                amount = number.getText().toString();
                 /*TODO: HOVER STUFF GOES HERE*/
                 //ecitizen 205d8fea
-                // nhif e07cc54a
-                //nssf7751435f
-                //helb 49a6b45c
 
+                // nhif e07cc54a
+                //nssf 7751435f
+                //helb 49a6b45c
+                switch (billName) {
+                    case "eCitizen":
+                        Intent kplcprepaid = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("205d8fea")
+                                .extra("paybill","206206")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(kplcprepaid, 0);
+                        break;
+                    case "Helb":
+                        Intent dstvpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("49a6b45c")
+                                .extra("paybill","200800")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(dstvpayment, 0);
+                        break;
+                    case "NHIF":
+                        Intent zukupayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("e07cc54a")
+                                .extra("paybill","200222")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(zukupayment, 0);
+                        break;
+                    case "NSSF":
+                        Intent gotvpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("7751435f")
+                                .extra("paybill","333300")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(gotvpayment, 0);
+                        break;
+
+
+                }
 //                alertDialog.dismiss();
 
             }

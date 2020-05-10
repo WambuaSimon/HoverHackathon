@@ -54,6 +54,7 @@ public class UtilityFragment extends Fragment {
                 payDialog("KPLC Prepaid");
             }
         });
+        //initialize hover
         DownloadListener xv = new DownloadListener();
         Hover.initialize(Objects.requireNonNull(getContext()));
         Hover.updateActionConfigs(xv, Objects.requireNonNull(getContext()));
