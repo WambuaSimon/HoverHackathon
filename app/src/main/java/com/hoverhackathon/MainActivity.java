@@ -1,5 +1,6 @@
 package com.hoverhackathon;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,30 +25,45 @@ import com.hoverhackathon.DB.AppDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.READ_SMS;
+
 public class MainActivity extends AppCompatActivity {
     private static final int TYPE_INCOMING_MESSAGE = 1;
+    private static final int REQUEST_CODE_ASK_PERMISSIONS = 100;
     private ListView messageList;
     private MessageListAdapter messageListAdapter;
     private List<Message> recordsStored;
     Button proceed;
     boolean isFirstRun;
     SharedPreferences wmbPreference;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!checkPermission()) {  // this line checks permission everytime you access this activity
+            Toast.makeText(getApplicationContext(), "Grant Permission to View Messages", Toast.LENGTH_SHORT).show();
+            requestPermission();
+        }
+
+        if (checkPermission()) {
             wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
-             isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
-            if (isFirstRun)
-            {
+            isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
+            if (isFirstRun) {
                 fetchInboxSms();
                 // Code to run once
                 SharedPreferences.Editor editor = wmbPreference.edit();
                 editor.putBoolean("FIRSTRUN", false);
                 editor.commit();
             }
-        setContentView(R.layout.activity_main);
 
-        initViews();
+
+            setContentView(R.layout.activity_main);
+
+            initViews();
+        }
+
     }
 
     @Override
@@ -111,10 +129,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void GetMessages() {
-        class getMessages extends AsyncTask<Void, Void, List<Message>> {
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Loading Messages...");
 
+        class getMessages extends AsyncTask<Void, Void, List<Message>> {
             @Override
             protected List<Message> doInBackground(Void... voids) {
+
                 List<Message> messages = AppDatabase.getCfctDatabase(getApplicationContext()).messageDAO().getMessages();
                 recordsStored = messages;
                 return messages;
@@ -122,9 +143,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog.show();
+            }
+
+            @Override
             protected void onPostExecute(List<Message> messages) {
                 super.onPostExecute(messages);
-                Log.d("MessagesList", String.valueOf(messages.size()));
+                progressDialog.dismiss();
+//                Log.d("MessagesList", String.valueOf(messages.size()));
                 for (int i = 0; i < messages.size(); i++) {
                     Message message = messages.get(i);
                     int item = message.getStatus();
@@ -222,5 +250,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+
+    public boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(this, READ_SMS);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{READ_SMS}, REQUEST_CODE_ASK_PERMISSIONS);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == REQUEST_CODE_ASK_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                Toast.makeText(getApplicationContext(), "Please allow access to continue!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
