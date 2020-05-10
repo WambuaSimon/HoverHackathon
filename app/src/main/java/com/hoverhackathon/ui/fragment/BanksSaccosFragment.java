@@ -43,6 +43,11 @@ public class BanksSaccosFragment extends Fragment {
     }
 
     void init() {
+        //initialize hover
+        DownloadListener xv = new DownloadListener();
+        Hover.initialize(Objects.requireNonNull(getContext()));
+        Hover.updateActionConfigs(xv, Objects.requireNonNull(getContext()));
+
         im = view.findViewById(R.id.im);
         kcb = view.findViewById(R.id.kcb);
         equity = view.findViewById(R.id.equity);
@@ -50,10 +55,7 @@ public class BanksSaccosFragment extends Fragment {
         sheria = view.findViewById(R.id.sheria);
         stima = view.findViewById(R.id.stima);
 
-        //initialize hover
-        DownloadListener xv = new DownloadListener();
-        Hover.initialize(Objects.requireNonNull(getContext()));
-        Hover.updateActionConfigs(xv, Objects.requireNonNull(getContext()));
+
 
         im.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +151,7 @@ public class BanksSaccosFragment extends Fragment {
                                 .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(iandmbank, 0);
+                        alertDialog.dismiss();
                         break;
                     case "KCB Bank":
                         Intent kcbbank = new HoverParameters.Builder(getContext())
@@ -159,6 +162,7 @@ public class BanksSaccosFragment extends Fragment {
                                 .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(kcbbank, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Equity Bank":
                         Intent equitybank = new HoverParameters.Builder(getContext())
@@ -169,16 +173,19 @@ public class BanksSaccosFragment extends Fragment {
                                 .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(equitybank, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Standard Chartered Bank":
                         Intent gotvpayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
-                                .request("21cd7bf8")
+                                .request("599c6c26")
                                 .extra("paybill", "329329")
                                 .extra("accountnumber", accountnumber)
                                 .extra("amount", amount)
+                                .setEnvironment(HoverParameters.DEBUG_ENV)
                                 .buildIntent();
                         startActivityForResult(gotvpayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Sheria Sacco":
                         Intent starttimespayment = new HoverParameters.Builder(getContext())
@@ -189,6 +196,7 @@ public class BanksSaccosFragment extends Fragment {
                                 .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(starttimespayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Stima Sacco":
                         Intent rentpayment = new HoverParameters.Builder(getContext())
@@ -199,6 +207,7 @@ public class BanksSaccosFragment extends Fragment {
                                 .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(rentpayment, 0);
+                        alertDialog.dismiss();
                         break;
 
                 }

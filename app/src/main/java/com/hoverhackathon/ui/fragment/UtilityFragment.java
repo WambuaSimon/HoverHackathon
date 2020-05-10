@@ -183,6 +183,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(kplcprepaid, 0);
+                        alertDialog.dismiss();
                         break;
                     case "DSTV":
                         Intent dstvpayment = new HoverParameters.Builder(getContext())
@@ -193,6 +194,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(dstvpayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Zuku":
                         Intent zukupayment = new HoverParameters.Builder(getContext())
@@ -203,6 +205,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(zukupayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "GOTV":
                         Intent gotvpayment = new HoverParameters.Builder(getContext())
@@ -213,6 +216,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(gotvpayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Star Times":
                         Intent starttimespayment = new HoverParameters.Builder(getContext())
@@ -223,6 +227,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(starttimespayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Rent":
                         Intent rentpayment = new HoverParameters.Builder(getContext())
@@ -233,6 +238,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(rentpayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Madaraka Express":
                         Intent madarakaexpresspayment = new HoverParameters.Builder(getContext())
@@ -243,6 +249,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(madarakaexpresspayment, 0);
+                        alertDialog.dismiss();
                        break;
                     case"BuuPass":
                         Intent buupasspayment = new HoverParameters.Builder(getContext())
@@ -250,6 +257,7 @@ public class UtilityFragment extends Fragment {
                                 .request("112c155a")
                                 .buildIntent();
                         startActivityForResult(buupasspayment, 0);
+                        alertDialog.dismiss();
                         break;
 
                 }

@@ -124,11 +124,7 @@ public class GovernmentServicesFragment extends Fragment {
                 accountnumber = account_no.getText().toString();
                 amount = number.getText().toString();
                 /*TODO: HOVER STUFF GOES HERE*/
-                //ecitizen 205d8fea
 
-                // nhif e07cc54a
-                //nssf 7751435f
-                //helb 49a6b45c
                 switch (billName) {
                     case "eCitizen":
                         Intent kplcprepaid = new HoverParameters.Builder(getContext())
@@ -139,6 +135,7 @@ public class GovernmentServicesFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(kplcprepaid, 0);
+                        alertDialog.dismiss();
                         break;
                     case "Helb":
                         Intent dstvpayment = new HoverParameters.Builder(getContext())
@@ -147,8 +144,10 @@ public class GovernmentServicesFragment extends Fragment {
                                 .extra("paybill","200800")
                                 .extra("accountnumber",accountnumber)
                                 .extra("amount",amount)
+                                .setEnvironment(HoverParameters.DEBUG_ENV)
                                 .buildIntent();
                         startActivityForResult(dstvpayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "NHIF":
                         Intent zukupayment = new HoverParameters.Builder(getContext())
@@ -159,6 +158,7 @@ public class GovernmentServicesFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(zukupayment, 0);
+                        alertDialog.dismiss();
                         break;
                     case "NSSF":
                         Intent gotvpayment = new HoverParameters.Builder(getContext())
@@ -169,6 +169,7 @@ public class GovernmentServicesFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(gotvpayment, 0);
+                        alertDialog.dismiss();
                         break;
 
 

@@ -1,6 +1,7 @@
 package com.hoverhackathon;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -20,10 +21,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.hover.sdk.api.Hover;
+import com.hover.sdk.api.HoverParameters;
 import com.hoverhackathon.DB.AppDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_SMS;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView messageList;
     private MessageListAdapter messageListAdapter;
     private List<Message> recordsStored;
+    String number;
     Button proceed;
     boolean isFirstRun;
     SharedPreferences wmbPreference;
@@ -42,10 +47,14 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //initialize hover
+        DownloadListener xv = new DownloadListener();
+        Hover.initialize(Objects.requireNonNull(getApplicationContext()));
+        Hover.updateActionConfigs(xv, Objects.requireNonNull(getApplicationContext()));
         if (!checkPermission()) {  // this line checks permission everytime you access this activity
             Toast.makeText(getApplicationContext(), "Grant Permission to View Messages", Toast.LENGTH_SHORT).show();
             requestPermission();
-        }else {
+        } else {
             wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
             isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
             if (isFirstRun) {
@@ -84,24 +93,30 @@ public class MainActivity extends AppCompatActivity {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("recordsStored", String.valueOf(recordsStored.size()));
-
+                // Log.d("recordsStored", String.valueOf(recordsStored.size()));
                 for (int m = 0; m < recordsStored.size(); m++) {
                     Message msg = recordsStored.get(m);
                     if (msg.isChecked) {
                         Message msgList = recordsStored.get(m);
-                        String number = recordsStored.get(m).messageNumber.toLowerCase().trim();
-//                        Log.d("recordsStored", number);
+                        number = recordsStored.get(m).messageNumber.toLowerCase().trim();
+                        Log.d("recordsStored", number);
                         updateTask(msgList);
                         recordsStored.remove(m--);
                         messageListAdapter.notifyDataSetChanged();
+                        /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
+                            Intent unsubscribe = new HoverParameters.Builder(getApplicationContext())
+                                    //.extra("", "")
+                                    .request("1a5963da")
+                                    .extra("SenderName", recordsStored.get(m).getMessageNumber())
+                                    //.setEnvironment(HoverParameters.DEBUG_ENV)
+                                    .buildIntent();
+                            startActivityForResult(unsubscribe, 0);
+                        }
 
                     }
-                    /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
-//
+
                 }
 
-            }
         });
 
     }
