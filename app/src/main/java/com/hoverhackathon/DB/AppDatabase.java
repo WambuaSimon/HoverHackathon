@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import com.hoverhackathon.Dao.MessageDAO;
 import com.hoverhackathon.Message;
 
-@Database(entities = {Message.class}, version = 2,exportSchema = false)
+@Database(entities = {Message.class}, version = 6,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "message_db";

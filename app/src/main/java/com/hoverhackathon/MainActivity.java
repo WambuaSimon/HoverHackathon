@@ -1,72 +1,60 @@
 package com.hoverhackathon;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.List;
-
-import android.app.Activity;
-
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hoverhackathon.DB.AppDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final int TYPE_INCOMING_MESSAGE = 1;
     private ListView messageList;
     private MessageListAdapter messageListAdapter;
     private List<Message> recordsStored;
-    private List<Message> listInboxMessages;
-
-    private CustomHandler customHandler;
-    int REQUEST_CODE_ASK_PERMISSIONS = 100;
     Button proceed;
-
+    boolean isFirstRun;
+    SharedPreferences wmbPreference;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+            wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
+             isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
+            if (isFirstRun)
+            {
+                fetchInboxSms();
+                // Code to run once
+                SharedPreferences.Editor editor = wmbPreference.edit();
+                editor.putBoolean("FIRSTRUN", false);
+                editor.commit();
+            }
         setContentView(R.layout.activity_main);
 
-        if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
-            initViews();
-
-        } else {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{"android.permission.READ_SMS"}, REQUEST_CODE_ASK_PERMISSIONS);
-        }
+        initViews();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        populateMessageList();
+//        populateMessageList();
     }
 
     private void initViews() {
-        customHandler = new CustomHandler(this);
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
@@ -79,73 +67,90 @@ public class MainActivity extends AppCompatActivity {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int m = 0; m < recordsStored.size(); m++) {
-                    if (recordsStored.get(m).isChecked) {
-                        String number = recordsStored.get(m).messageNumber;
-                        Log.d("recordsStored", number);
-                    }
+                Log.d("recordsStored", String.valueOf(recordsStored.size()));
 
+                for (int m = 0; m < recordsStored.size(); m++) {
+                    Message msg = recordsStored.get(m);
+                    if (msg.isChecked) {
+                        Message msgList = recordsStored.get(m);
+                        String number = recordsStored.get(m).messageNumber.toLowerCase().trim();
+//                        Log.d("recordsStored", number);
+                        updateTask(msgList);
+                        recordsStored.remove(m--);
+                        messageListAdapter.notifyDataSetChanged();
+
+                    }
+                    /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
+//
                 }
-                /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
 
             }
         });
 
     }
 
+    private void updateTask(final Message task) {
 
+        class UpdateMessage extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+//                task.setMessageNumber(task.messageNumber);
+                AppDatabase.getCfctDatabase(getApplicationContext()).messageDAO().updateMessage(task.messageNumber);
+                return null;
+            }
 
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+//                Log.d("Update Message", "Success");
+            }
+        }
+        UpdateMessage ut = new UpdateMessage();
+        ut.execute();
+
+    }
+
+    void GetMessages() {
+        class getMessages extends AsyncTask<Void, Void, List<Message>> {
+
+            @Override
+            protected List<Message> doInBackground(Void... voids) {
+                List<Message> messages = AppDatabase.getCfctDatabase(getApplicationContext()).messageDAO().getMessages();
+                recordsStored = messages;
+                return messages;
+
+            }
+
+            @Override
+            protected void onPostExecute(List<Message> messages) {
+                super.onPostExecute(messages);
+                Log.d("MessagesList", String.valueOf(messages.size()));
+                for (int i = 0; i < messages.size(); i++) {
+                    Message message = messages.get(i);
+                    int item = message.getStatus();
+                    String address = message.getMessageNumber();
+//                    Log.d("MessageItemValue", address + " " + item);
+
+                    messageListAdapter = new MessageListAdapter(MainActivity.this,
+                            R.layout.message_list_item, messages);
+                    messageList.setAdapter(messageListAdapter);
+
+                }
+            }
+        }
+        getMessages msg = new getMessages();
+        msg.execute();
+    }
 
     public void populateMessageList() {
-        fetchInboxMessages();
-
-        /*TODO: only show addresses saved in ROOM DB*/
-        /*TODO: store numbers/address and status to ROOM*/
-        /*TODO: check if such numbers have been unsubscribed by checking status flag in ROOM*/
-        /*TODO: if status==1, it's been here before so don't store, else, store with status==0*/
-        /*TODO: only fetch with status==0, put in array list and pass to list adapter*/
-
-        messageListAdapter = new MessageListAdapter(this,
-                R.layout.message_list_item, recordsStored);
-        messageList.setAdapter(messageListAdapter);
+        GetMessages();
 
     }
 
-
-    private void fetchInboxMessages() {
-        if (listInboxMessages == null) {
-
-            startThread();
-        } else {
-            // messageType = TYPE_INCOMING_MESSAGE;
-            recordsStored = listInboxMessages;
-            messageListAdapter.setArrayList(recordsStored);
-        }
-    }
-
-    public class FetchMessageThread extends Thread {
-        public int tag = -1;
-        public FetchMessageThread(int tag) {
-            this.tag = tag;
-        }
-
-        @Override
-        public void run() {
-
-            recordsStored = fetchInboxSms(TYPE_INCOMING_MESSAGE);
-            listInboxMessages = recordsStored;
-            customHandler.sendEmptyMessage(0);
-
-        }
-
-    }
-
-    public List<Message> fetchInboxSms(int type) {
-        List<Message> smsInbox = new ArrayList<>();
-
+    public void fetchInboxSms() {
+        final List<Message> smsInbox = new ArrayList<>();
         Uri uriSms = Uri.parse("content://sms");
-
-        Cursor cursor = this.getContentResolver()
+        final Cursor cursor = this.getContentResolver()
                 .query(uriSms,
                         new String[]{"_id", "address", "date", "body",
                                 "type", "read"}, "address IS NOT NULL) GROUP BY (address", //GROUP BY
@@ -159,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     final Message message = new Message();
                     message.messageNumber = cursor.getString(cursor
                             .getColumnIndex("address"));
+
                     if (!message.messageNumber.equalsIgnoreCase("Safaricom") &&
                             !message.messageNumber.equalsIgnoreCase("Mshwari") &&
                             !message.messageNumber.equalsIgnoreCase("KPLC") &&
@@ -167,74 +173,44 @@ public class MainActivity extends AppCompatActivity {
                             !message.messageNumber.equalsIgnoreCase("iandmbank") &&
                             !message.messageNumber.equalsIgnoreCase("safhome") &&
                             !message.messageNumber.equalsIgnoreCase("authmsg") &&
-                            !message.messageNumber.equalsIgnoreCase("google")&&
+                            !message.messageNumber.equalsIgnoreCase("google") &&
                             message.messageNumber.length() < 10) {
 
-                        smsInbox.add(message);
+//                        address = cursor.getString(cursor
+//                                .getColumnIndex("address"));
+//                        Log.d("AddressValue", address);
+//                        smsInbox.add(message);
+
+                        class SaveMessage extends AsyncTask<Void, Void, Void> {
+
+                            @Override
+                            protected Void doInBackground(Void... voids) {
+
+                                AppDatabase.getCfctDatabase(getApplicationContext()).messageDAO().insertMessage(message);
+
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                super.onPostExecute(aVoid);
+//                                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        SaveMessage saveMessage = new SaveMessage();
+                        saveMessage.execute();
+
 
                     }
 
                 } while (cursor.moveToNext());
-            }
-        }
-
-        return smsInbox;
-
-    }
-
-    private FetchMessageThread fetchMessageThread;
-
-    private int currentCount = 0;
-
-    public synchronized void startThread() {
-
-        if (fetchMessageThread == null) {
-            fetchMessageThread = new FetchMessageThread(currentCount);
-            fetchMessageThread.start();
-        }
-    }
-
-    public synchronized void stopThread() {
-        if (fetchMessageThread != null) {
-            Log.i("Cancel thread", "stop thread");
-            FetchMessageThread moribund = fetchMessageThread;
-            currentCount = fetchMessageThread.tag == 0 ? 1 : 0;
-            fetchMessageThread = null;
-            moribund.interrupt();
-        }
-    }
-
-    static class CustomHandler extends Handler {
-        private final WeakReference<MainActivity> activityHolder;
-
-        CustomHandler(MainActivity inboxListActivity) {
-            activityHolder = new WeakReference<MainActivity>(inboxListActivity);
-        }
-
-        @Override
-        public void handleMessage(android.os.Message msg) {
-
-            MainActivity inboxListActivity = activityHolder.get();
-            if (inboxListActivity.fetchMessageThread != null
-                    && inboxListActivity.currentCount == inboxListActivity.fetchMessageThread.tag) {
-                Log.i("received result", "received result");
-                inboxListActivity.fetchMessageThread = null;
-
-                inboxListActivity.messageListAdapter
-                        .setArrayList(inboxListActivity.recordsStored);
 
             }
+
         }
+
     }
 
-    private OnCancelListener dialogCancelListener = new OnCancelListener() {
-
-        @Override
-        public void onCancel(DialogInterface dialog) {
-            stopThread();
-        }
-
-    };
 
     @Override
     protected void onPause() {
