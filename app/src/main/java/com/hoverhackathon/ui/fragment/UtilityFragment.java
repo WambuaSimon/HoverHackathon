@@ -1,5 +1,6 @@
 package com.hoverhackathon.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -16,16 +17,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hover.sdk.api.Hover;
+import com.hover.sdk.api.HoverParameters;
+import com.hoverhackathon.DownloadListener;
 import com.hoverhackathon.R;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class UtilityFragment extends Fragment {
-    CardView kplc,dstv,zuku,gotv,star,rent,bonga;
-    LinearLayout sgr,buupass;
+    CardView kplc, dstv, zuku, gotv, star, rent, bonga;
+    LinearLayout sgr, buupass;
     View view;
-
+    String accountnumber, amount;
     public UtilityFragment() {
         // Required empty public constructor
     }
@@ -48,6 +54,10 @@ public class UtilityFragment extends Fragment {
                 payDialog("KPLC Prepaid");
             }
         });
+        //initialize hover
+        DownloadListener xv = new DownloadListener();
+        Hover.initialize(Objects.requireNonNull(getContext()));
+        Hover.updateActionConfigs(xv, Objects.requireNonNull(getContext()));
 
         dstv = view.findViewById(R.id.dstv);
         dstv.setOnClickListener(new View.OnClickListener() {
@@ -110,12 +120,17 @@ public class UtilityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Proceed with pay with bonga", Toast.LENGTH_SHORT).show();
+                Intent payWithBonga = new HoverParameters.Builder(getContext())
+                        //.extra("", "")
+                        .request("def448ba")
+                        .buildIntent();
+                startActivityForResult(payWithBonga, 0);
             }
         });
     }
 
 
-    void payDialog(String billName) {
+    void payDialog(final String billName) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -146,18 +161,98 @@ public class UtilityFragment extends Fragment {
             public void onClick(View v) {
 
                 if (account_no.getText().toString().isEmpty()) {
-                    account_no.setError("Enter Paybill");
+                    account_no.setError("Enter account no.");
                 } else {
                     account_no.setError(null);
                 }
                 if (number.getText().toString().isEmpty()) {
-                    number.setError("Enter Paybill");
+                    number.setError("Enter amount.");
                 } else {
                     number.setError(null);
                 }
-
+                accountnumber = account_no.getText().toString();
+                amount = number.getText().toString();
                 /*TODO: HOVER STUFF GOES HERE*/
+                switch (billName) {
+                    case "KPLC Prepaid":
+                        Intent kplcprepaid = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("afdccceb")
+                                .extra("paybill","888880")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(kplcprepaid, 0);
+                        break;
+                    case "DSTV":
+                        Intent dstvpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("9a41e022")
+                                .extra("paybill","444900")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(dstvpayment, 0);
+                        break;
+                    case "Zuku":
+                        Intent zukupayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("a725648a")
+                                .extra("paybill","320323")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(zukupayment, 0);
+                        break;
+                    case "GOTV":
+                        Intent gotvpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("52cf4887")
+                                .extra("paybill","423655")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(gotvpayment, 0);
+                        break;
+                    case "Star Times":
+                        Intent starttimespayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("def448ba")
+                                .extra("paybill","585858")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(starttimespayment, 0);
+                        break;
+                    case "Rent":
+                        Intent rentpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("4310a43b")
+                                .extra("paybill","247247")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(rentpayment, 0);
+                        break;
+                    case "Madaraka Express":
+                        Intent madarakaexpresspayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("4c65b52c")
+                                .extra("paybill","809888 ")
+                                .extra("accountnumber",accountnumber)
+                                .extra("amount",amount)
+                                .buildIntent();
+                        startActivityForResult(madarakaexpresspayment, 0);
+                       break;
+                    case"BuuPass":
+                        Intent buupasspayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("112c155a")
+                                .buildIntent();
+                        startActivityForResult(buupasspayment, 0);
+                        break;
 
+                }
 //                alertDialog.dismiss();
 
             }

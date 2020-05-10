@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,26 +24,34 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.hover.sdk.api.Hover;
+import com.hover.sdk.api.HoverParameters;
+import com.hoverhackathon.DownloadListener;
 import com.hoverhackathon.R;
 import com.hoverhackathon.adapter.CountyServicesAdapter;
 import com.hoverhackathon.model.CountyModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ActivityCountyServices extends AppCompatActivity implements CountyServicesAdapter.CountyServicesAdapterListener, AdapterView.OnItemSelectedListener {
     RecyclerView recyclerView;
     List<CountyModel> countyModelList;
     CountyServicesAdapter adapter;
     SearchView searchView;
-      Spinner spinner;
-      EditText plate_no;
+    Spinner spinner;
+    EditText plate_no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_county_services);
 
+        //initialize hover
+        DownloadListener xv = new DownloadListener();
+        Hover.initialize(Objects.requireNonNull(getApplicationContext()));
+        Hover.updateActionConfigs(xv, Objects.requireNonNull(getApplicationContext()));
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -156,7 +165,8 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
         View dialogView = inflater.inflate(R.layout.dialog_country_layout, null);
         dialogBuilder.setView(dialogView);
 
-      final  EditText amount;;
+        final EditText amount;
+        ;
         Button pay, cancel;
 
         TextView bill_name = dialogView.findViewById(R.id.bill_name);
@@ -196,6 +206,25 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
                 }
 
                 /*TODO: HOVER STUFF GOES HERE*/
+                //nairobi
+//                switch (countyName) {
+//                    case "I&M Bank":
+//                        Intent iandmbank = new HoverParameters.Builder(getApplicationContext())
+//                                //.extra("", "")
+//                                .request("741e5e8f")
+//                                .extra("kplcpaybill", "888880")
+//                                .extra("accountnumber", "account_no")
+//                                .extra("amount", "number")
+//                                .buildIntent();
+//                        startActivityForResult(iandmbank, 0);
+//                        break;
+                //kiambu
+                //nyeri
+                //mombasa
+                //nakuru
+                //kakamega
+
+
 
 //                alertDialog.dismiss();
 
@@ -208,10 +237,9 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
-        if(item.equalsIgnoreCase("Parking")){
+        if (item.equalsIgnoreCase("Parking")) {
             plate_no.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             plate_no.setVisibility(View.GONE);
         }
 
