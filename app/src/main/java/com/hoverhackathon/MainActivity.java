@@ -45,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if (!checkPermission()) {  // this line checks permission everytime you access this activity
             Toast.makeText(getApplicationContext(), "Grant Permission to View Messages", Toast.LENGTH_SHORT).show();
             requestPermission();
-        }
-
-        if (checkPermission()) {
+        }else {
             wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
             isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
             if (isFirstRun) {
@@ -63,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
             initViews();
         }
+
 
     }
 

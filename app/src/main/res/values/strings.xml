@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HoverHackathon</string>
+    <string name="app_name">OffLyn</string>
     <string name="title">Utility Bills</string>
     <string name="banks_sacco"><![CDATA[Banks & Sacco]]></string>
     <string name="county">County Services</string>

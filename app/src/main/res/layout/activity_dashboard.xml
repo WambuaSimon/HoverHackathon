@@ -6,8 +6,7 @@
 
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -31,30 +30,46 @@
                 app:expandedTitleMarginStart="8dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                >
+                <LinearLayout android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical">
 
                 <TextView
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/alice"
                     android:layout_height="wrap_content"
-                    android:text="App Name or Logo goes here"
+                    android:text="@string/app_name"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
+                    android:textSize="30sp"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     />
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/toolbar_image"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_marginTop="@dimen/_7sdp"-->
-<!--                    android:layout_gravity="center_horizontal"-->
-<!--                    android:layout_height="@dimen/_50sdp"-->
-<!--                    android:adjustViewBounds="true"-->
-<!--                    android:contentDescription="@null"-->
-<!--                    android:fitsSystemWindows="true"-->
-<!--                    android:scaleType="centerCrop"-->
-<!--                    android:src="@drawable/logo" />-->
+                <ImageView
+                    android:id="@+id/toolbar_image"
+                    android:layout_width="@dimen/_50sdp"
 
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="@dimen/_50sdp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/logo" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/chela_one"
+                        android:text="Sort bills magizani"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_20sdp" />
+                </LinearLayout>
 
 
                 <androidx.appcompat.widget.Toolbar

@@ -28,7 +28,7 @@ public class DashboardActivity extends AppCompatActivity {
             if (!checkIfAlreadyhavePermission()) {
                 requestForSpecificPermission();
             }else{
-
+//                finish();
             }
         }
         setContentView(R.layout.activity_dashboard);
@@ -45,7 +45,6 @@ public class DashboardActivity extends AppCompatActivity {
         if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
-
             return false;
 
         }
