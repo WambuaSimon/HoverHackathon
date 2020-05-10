@@ -19,8 +19,8 @@ import com.hoverhackathon.R;
  * A simple {@link Fragment} subclass.
  */
 public class GovernmentServicesFragment extends Fragment {
-CardView ecitizen,nhif,nssf,helb;
-View view;
+    CardView ecitizen, nhif, nssf, helb;
+    View view;
 
     public GovernmentServicesFragment() {
         // Required empty public constructor
@@ -31,44 +31,45 @@ View view;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         view = inflater.inflate(R.layout.fragment_government_services, container, false);
-         init();
+        view = inflater.inflate(R.layout.fragment_government_services, container, false);
+        init();
 
         return view;
     }
-    void init(){
-        ecitizen=view.findViewById(R.id.ecitizen);
-        nhif=view.findViewById(R.id.nhif);
-        nssf=view.findViewById(R.id.nssf);
-        helb=view.findViewById(R.id.helb);
+
+    void init() {
+        ecitizen = view.findViewById(R.id.ecitizen);
+        nhif = view.findViewById(R.id.nhif);
+        nssf = view.findViewById(R.id.nssf);
+        helb = view.findViewById(R.id.helb);
 
         ecitizen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("eCitizen","Enter Account Number");
+                payDialog("eCitizen", "Enter Account Number");
             }
         });
         helb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("Helb","Enter ID Number");
+                payDialog("Helb", "Enter ID Number");
             }
         });
         nhif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("NHIF","Enter ID/Member Number");
+                payDialog("NHIF", "Enter ID/Member Number");
             }
         });
         nssf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payDialog("NSSF","Enter NSSF Number");
+                payDialog("NSSF", "Enter NSSF Number");
             }
         });
     }
 
-    void payDialog(String billName,String hint) {
+    void payDialog(String billName, String hint) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -111,6 +112,10 @@ View view;
                 }
 
                 /*TODO: HOVER STUFF GOES HERE*/
+                //ecitizen 205d8fea
+                // nhif e07cc54a
+                //nssf7751435f
+                //helb 49a6b45c
 
 //                alertDialog.dismiss();
 

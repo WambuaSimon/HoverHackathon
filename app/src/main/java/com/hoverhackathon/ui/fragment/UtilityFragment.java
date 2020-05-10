@@ -183,22 +183,74 @@ public class UtilityFragment extends Fragment {
                         startActivityForResult(kplcprepaid, 0);
                         break;
                     case "DSTV":
-
+                        Intent dstvpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("9a41e022")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(dstvpayment, 0);
                         break;
                     case "Zuku":
-
+                        Intent zukupayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("a725648a")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(zukupayment, 0);
                         break;
                     case "GOTV":
-
+                        Intent gotvpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("52cf4887")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(gotvpayment, 0);
                         break;
                     case "Star Times":
-
+                        Intent starttimespayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("def448ba")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(starttimespayment, 0);
                         break;
                     case "Rent":
+                        Intent rentpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("4310a43b")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(rentpayment, 0);
                         break;
                     case "Madaraka Express":
+                        Intent madarakaexpresspayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("4c65b52c")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(madarakaexpresspayment, 0);
                        break;
                     case"BuuPass":
+                        Intent buupasspayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("112c155a")
+                                .extra("kplcpaybill","888880")
+                                .extra("accountnumber","account_no")
+                                .extra("amount","number")
+                                .buildIntent();
+                        startActivityForResult(buupasspayment, 0);
                         break;
 
                 }

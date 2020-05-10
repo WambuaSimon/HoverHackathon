@@ -1,5 +1,6 @@
 package com.hoverhackathon.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -13,15 +14,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.hover.sdk.api.Hover;
+import com.hover.sdk.api.HoverParameters;
+import com.hoverhackathon.DownloadListener;
 import com.hoverhackathon.R;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BanksSaccosFragment extends Fragment {
     View view;
-    CardView im, kcb, equity, stan,sheria,stima;
-
+    CardView im, kcb, equity, stan, sheria, stima;
+    String accountnumber, amount;
     public BanksSaccosFragment() {
         // Required empty public constructor
     }
@@ -43,6 +49,11 @@ public class BanksSaccosFragment extends Fragment {
         stan = view.findViewById(R.id.stan);
         sheria = view.findViewById(R.id.sheria);
         stima = view.findViewById(R.id.stima);
+
+        //initialize hover
+        DownloadListener xv = new DownloadListener();
+        Hover.initialize(Objects.requireNonNull(getContext()));
+        Hover.updateActionConfigs(xv, Objects.requireNonNull(getContext()));
 
         im.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +93,7 @@ public class BanksSaccosFragment extends Fragment {
         });
     }
 
-    void payDialog(String billName) {
+    void payDialog(final String billName) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -124,8 +135,73 @@ public class BanksSaccosFragment extends Fragment {
                     number.setError(null);
                 }
 
-                /*TODO: HOVER STUFF GOES HERE*/
 
+                accountnumber = account_no.getText().toString();
+                amount = number.getText().toString();
+                /*TODO: HOVER STUFF GOES HERE*/
+                switch (billName) {
+                    case "I&M Bank":
+                        Intent iandmbank = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("741e5e8f")
+                                .extra("paybill", "542542")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
+                                .buildIntent();
+                        startActivityForResult(iandmbank, 0);
+                        break;
+                    case "KCB Bank":
+                        Intent kcbbank = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("bbe7034f")
+                                .extra("paybill", "522522")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
+                                .buildIntent();
+                        startActivityForResult(kcbbank, 0);
+                        break;
+                    case "Equity Bank":
+                        Intent equitybank = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("86238c25")
+                                .extra("paybill", "247247")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
+                                .buildIntent();
+                        startActivityForResult(equitybank, 0);
+                        break;
+                    case "Standard Chartered Bank":
+                        Intent gotvpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("21cd7bf8")
+                                .extra("paybill", "329329")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
+                                .buildIntent();
+                        startActivityForResult(gotvpayment, 0);
+                        break;
+                    case "Sheria Sacco":
+                        Intent starttimespayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("def448ba")
+                                .extra("paybill", "964700")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
+                                .buildIntent();
+                        startActivityForResult(starttimespayment, 0);
+                        break;
+                    case "Stima Sacco":
+                        Intent rentpayment = new HoverParameters.Builder(getContext())
+                                //.extra("", "")
+                                .request("6198c375")
+                                .extra("paybill", "523500")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
+                                .buildIntent();
+                        startActivityForResult(rentpayment, 0);
+                        break;
+
+                }
 //                alertDialog.dismiss();
 
             }
