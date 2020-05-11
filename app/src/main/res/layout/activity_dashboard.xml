@@ -12,10 +12,10 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_170sdp"
             android:fitsSystemWindows="true"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/gradient_file"
+            android:background="@drawable/bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
            >
@@ -35,28 +35,41 @@
                     android:layout_width="match_parent"
                     android:orientation="vertical">
 
-                <TextView
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/alice"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name"
-                    android:textColor="@android:color/white"
-                    android:textSize="30sp"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:fontFamily="@font/alice"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/app_name"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="30sp"-->
+<!--                    android:textAppearance="?attr/textAppearanceHeadline6"-->
+<!--                    />-->
 
-                    <ImageView
-                        android:id="@+id/toolbar_image"
-                        android:layout_width="86dp"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_gravity="center_horizontal"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@null"
-                        android:fitsSystemWindows="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/logo" />
+<!--<<<<<<< HEAD-->
+<!--                    <ImageView-->
+<!--                        android:id="@+id/toolbar_image"-->
+<!--                        android:layout_width="86dp"-->
+<!--                        android:layout_height="@dimen/_50sdp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:adjustViewBounds="true"-->
+<!--                        android:contentDescription="@null"-->
+<!--                        android:fitsSystemWindows="true"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/logo" />-->
+<!--=======-->
+                <ImageView
+                    android:id="@+id/toolbar_image"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="@dimen/_100sdp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
+                    android:fitsSystemWindows="true"
+
+                    android:src="@drawable/logo" />
+
 
                     <TextView
 
@@ -64,11 +77,11 @@
                         android:layout_height="wrap_content"
 
                         android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/chela_one"
+                        android:fontFamily="@font/calligraffitti"
                         android:text="Sort bills magizani"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/_20sdp" />
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_18sdp" />
                 </LinearLayout>
 
 
@@ -84,7 +97,7 @@
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-      android:layout_marginTop="-50dp"
+      android:layout_marginTop="-40dp"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
         <com.google.android.material.card.MaterialCardView
