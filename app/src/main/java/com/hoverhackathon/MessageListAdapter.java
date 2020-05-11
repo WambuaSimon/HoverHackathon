@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import es.dmoral.toasty.Toasty;
 import it.emperor.animatedcheckbox.AnimatedCheckBox;
 
 public class MessageListAdapter extends BaseAdapter {
@@ -88,7 +89,8 @@ public class MessageListAdapter extends BaseAdapter {
                     } else {
                         holder.check.setChecked(false);
                         messageListArray.get(position).isChecked = false;
-                        Toast.makeText(ctx, "Max limit reached", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(ctx, "Max limit reached", Toast.LENGTH_SHORT).show();
+                        Toasty.warning(ctx,"Select one address ata a time",Toasty.LENGTH_SHORT).show();
                     }
                 }
                     else {
@@ -114,7 +116,7 @@ public class MessageListAdapter extends BaseAdapter {
                 countermax++;
             }
         }
-        return countermax >= 100;
+        return countermax >= 1;
     }
 
     @Override

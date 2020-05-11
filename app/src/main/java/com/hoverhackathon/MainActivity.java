@@ -132,18 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                     }
-//                if((messages.size()>1))
-////                {
-////                    for(int n=0; n<messages.size();n++){
-////                        Message message= messages.get(n);
-////                        if (message.isChecked){
-////
-////
-////                        }
-////
-////                    }
-////
-////                }
+
                 }
 
         });
