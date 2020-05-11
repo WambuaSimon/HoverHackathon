@@ -15,6 +15,7 @@ public class TransactionModel {
     public TransactionModel() {
     }
 
+
     public int getUid() {
         return uid;
     }

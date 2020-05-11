@@ -52,6 +52,7 @@ public class UtilityFragment extends Fragment {
     }
 
     void init() {
+//        saveUtility("NHIF","Pending","2020/08/20");
         kplc = view.findViewById(R.id.kplc);
         kplc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +197,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(dstvpayment, 0);
-//                        saveUtility()
+
                         alertDialog.dismiss();
                         break;
                     case "Zuku":
@@ -289,28 +290,7 @@ public class UtilityFragment extends Fragment {
     }
 
 
-    void saveUtility(final String name, final String status, final String timestamp){
-        class Saveutility extends AsyncTask<Void,Void,Void>{
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                TransactionModel transactionModel = new TransactionModel();
-                transactionModel.setName(name);
-                transactionModel.setName(status);
-                transactionModel.setName(timestamp);
-
-                AppDatabase.getCfctDatabase(getActivity()).transactionDAO().insertTransaction(transactionModel);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Log.d(TAG,"Success");
-            }
-        }
-        Saveutility saveutility = new Saveutility();
-        saveutility.execute();
-
-    }
 }
+
+
+
