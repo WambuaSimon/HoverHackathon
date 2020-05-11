@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -94,27 +95,55 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Log.d("recordsStored", String.valueOf(recordsStored.size()));
+                List<String> messages=new ArrayList<>();
+                Handler handler1 = new Handler();
                 for (int m = 0; m < recordsStored.size(); m++) {
                     Message msg = recordsStored.get(m);
                     if (msg.isChecked) {
                         Message msgList = recordsStored.get(m);
+
+//                        messages=recordsStored;
                         number = recordsStored.get(m).messageNumber.toLowerCase().trim();
-                        Log.d("recordsStored", number);
-                        updateTask(msgList);
-                        recordsStored.remove(m--);
-                        messageListAdapter.notifyDataSetChanged();
-                        /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
+                        messages.add(msgList.getMessageNumber());
+                        for(int n=0; n<messages.size()-1;n++){
+
+                            Log.d("recordsStored", messages.toString());
+                            int times=messages.size();
+                            for(int i=0;i<times;++i){
                             Intent unsubscribe = new HoverParameters.Builder(getApplicationContext())
                                     //.extra("", "")
                                     .request("1a5963da")
-                                    .extra("SenderName", recordsStored.get(m).getMessageNumber())
+                                    .extra("SenderName", messages.get(n))
                                     //.setEnvironment(HoverParameters.DEBUG_ENV)
                                     .buildIntent();
                             startActivityForResult(unsubscribe, 0);
                         }
+                        }
+
+
+
+                    //    Log.d("recordsStored", number);
+//                        updateTask(msgList);
+//                        recordsStored.remove(m--);
+//                        messageListAdapter.notifyDataSetChanged();
+                        /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
+
+
+                        }
 
                     }
-
+//                if((messages.size()>1))
+////                {
+////                    for(int n=0; n<messages.size();n++){
+////                        Message message= messages.get(n);
+////                        if (message.isChecked){
+////
+////
+////                        }
+////
+////                    }
+////
+////                }
                 }
 
         });
