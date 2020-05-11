@@ -196,6 +196,7 @@ public class BanksSaccosFragment extends Fragment {
                                 .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(starttimespayment, 0);
+
                         alertDialog.dismiss();
                         break;
                     case "Stima Sacco":

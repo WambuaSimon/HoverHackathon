@@ -1,12 +1,14 @@
 package com.hoverhackathon.ui.fragment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,10 @@ import android.widget.Toast;
 
 import com.hover.sdk.api.Hover;
 import com.hover.sdk.api.HoverParameters;
+import com.hoverhackathon.DB.AppDatabase;
 import com.hoverhackathon.DownloadListener;
 import com.hoverhackathon.R;
+import com.hoverhackathon.model.TransactionModel;
 
 import java.util.Objects;
 
@@ -32,6 +36,7 @@ public class UtilityFragment extends Fragment {
     LinearLayout sgr, buupass;
     View view;
     String accountnumber, amount;
+    String TAG = "UtilityActions";
     public UtilityFragment() {
         // Required empty public constructor
     }
@@ -194,6 +199,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(dstvpayment, 0);
+                        saveUtility();
                         alertDialog.dismiss();
                         break;
                     case "Zuku":
@@ -205,6 +211,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(zukupayment, 0);
+                        saveUtility()
                         alertDialog.dismiss();
                         break;
                     case "GOTV":
@@ -216,6 +223,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(gotvpayment, 0);
+                        saveUtility()
                         alertDialog.dismiss();
                         break;
                     case "Star Times":
@@ -227,6 +235,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(starttimespayment, 0);
+                        saveUtility()
                         alertDialog.dismiss();
                         break;
                     case "Rent":
@@ -238,6 +247,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(rentpayment, 0);
+                        saveUtility()
                         alertDialog.dismiss();
                         break;
                     case "Madaraka Express":
@@ -249,6 +259,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(madarakaexpresspayment, 0);
+                        saveUtility()
                         alertDialog.dismiss();
                        break;
                     case"BuuPass":
@@ -257,6 +268,7 @@ public class UtilityFragment extends Fragment {
                                 .request("112c155a")
                                 .buildIntent();
                         startActivityForResult(buupasspayment, 0);
+                        saveUtility()
                         alertDialog.dismiss();
                         break;
 
@@ -267,5 +279,30 @@ public class UtilityFragment extends Fragment {
         });
 
         alertDialog.show();
+    }
+
+    void saveUtility(final String name, final String status, final String timestamp){
+        class Saveutility extends AsyncTask<Void,Void,Void>{
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                TransactionModel transactionModel = new TransactionModel();
+                transactionModel.setName(name);
+                transactionModel.setName(status);
+                transactionModel.setName(timestamp);
+
+                AppDatabase.getCfctDatabase(getActivity()).transactionDAO().insertTransaction(transactionModel);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Log.d(TAG,"Success");
+            }
+        }
+        Saveutility saveutility = new Saveutility();
+        saveutility.execute();
+
     }
 }
