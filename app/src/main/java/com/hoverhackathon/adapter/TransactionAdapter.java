@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -73,10 +74,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         name.setText(filteredTransactionModel.get(listPosition).getName());
         date.setText(filteredTransactionModel.get(listPosition).getDate());
         status.setText(filteredTransactionModel.get(listPosition).getStatus());
-//        if(status.getText().toString().equalsIgnoreCase("Pending")){
-//            status.setTextColor();
-//        }
-
+        if (status.getText().toString().equalsIgnoreCase("Pending")) {
+            status.setTextColor(ContextCompat.getColor(context, R.color.yellow));
+        } else if (status.getText().toString().equalsIgnoreCase("Succeeded")) {
+            status.setTextColor(ContextCompat.getColor(context, R.color.green));
+        } else if (status.getText().toString().equalsIgnoreCase("Failed")) {
+            status.setTextColor(ContextCompat.getColor(context, R.color.red));
+        }
         /*image icon*/
         /*generate random color*/
         ColorGenerator generator = ColorGenerator.MATERIAL;
@@ -87,7 +91,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 .width(60)  // width in px
                 .height(60) // height in px
                 .endConfig()
-                .buildRound(model.getName().substring(0,1), color1);
+                .buildRound(model.getName().substring(0, 1), color1);
 
         name_icon.setImageDrawable(drawable);
 
