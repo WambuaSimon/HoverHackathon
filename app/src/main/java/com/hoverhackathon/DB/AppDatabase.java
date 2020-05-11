@@ -1,3 +1,4 @@
+
 package com.hoverhackathon.DB;
 
 import android.content.Context;
@@ -49,6 +50,4 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract MessageDAO messageDAO();
     public  abstract TransactionDAO transactionDAO();
 }
-
-
 

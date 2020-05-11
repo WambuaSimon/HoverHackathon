@@ -32,7 +32,14 @@
         <meta-data
             android:name="com.hover.ApiKey"
             android:value="fcf600b8e515abf82593035b63896846" />
-
+        <receiver
+            android:name=".TransactionReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.hoverhackathon.CONFIRMED_TRANSACTION" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".ui.activity.ActivityPromotionalMessages">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

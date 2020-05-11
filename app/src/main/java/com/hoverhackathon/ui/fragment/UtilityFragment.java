@@ -125,12 +125,8 @@ public class UtilityFragment extends Fragment {
         bonga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Proceed with pay with bonga", Toast.LENGTH_SHORT).show();
-                Intent payWithBonga = new HoverParameters.Builder(getContext())
-                        //.extra("", "")
-                        .request("def448ba")
-                        .buildIntent();
-                startActivityForResult(payWithBonga, 0);
+//               ForResult(payWithBonga, 0);
+                payDialog("PayWithBonga");
             }
         });
     }
@@ -189,6 +185,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(kplcprepaid, 0);
+
                         alertDialog.dismiss();
                         break;
                     case "DSTV":
@@ -200,7 +197,7 @@ public class UtilityFragment extends Fragment {
                                 .extra("amount",amount)
                                 .buildIntent();
                         startActivityForResult(dstvpayment, 0);
-//                        saveUtility();
+
                         alertDialog.dismiss();
                         break;
                     case "Zuku":
@@ -262,7 +259,7 @@ public class UtilityFragment extends Fragment {
                         startActivityForResult(madarakaexpresspayment, 0);
 //                        saveUtility()
                         alertDialog.dismiss();
-                       break;
+                        break;
                     case"BuuPass":
                         Intent buupasspayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
@@ -272,38 +269,28 @@ public class UtilityFragment extends Fragment {
 //                        saveUtility()
                         alertDialog.dismiss();
                         break;
-
+                    case "PayWithBonga":
+                        Toast.makeText(getActivity(), "Enter till number and amount.", Toast.LENGTH_SHORT).show();
+                        Intent payWithBonga = new HoverParameters.Builder(getContext())
+                                .extra("tillnumber", accountnumber)
+                                .extra("amount", amount)
+                                .request("cff6d52c")
+                                .buildIntent();
+                        startActivityForResult(payWithBonga, 0);
+                        break;
                 }
+
 //                alertDialog.dismiss();
 
             }
+
         });
 
         alertDialog.show();
     }
 
-//    void saveUtility(final String name, final String status, final String timestamp){
-//        class Saveutility extends AsyncTask<Void,Void,Void>{
-//
-//            @Override
-//            protected Void doInBackground(Void... voids) {
-//                TransactionModel transactionModel = new TransactionModel();
-//                transactionModel.setName(name);
-//                transactionModel.setStatus(status);
-//                transactionModel.setDate(timestamp);
-//
-//                AppDatabase.getCfctDatabase(getActivity()).transactionDAO().insertTransaction(transactionModel);
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Void aVoid) {
-//                super.onPostExecute(aVoid);
-//                Log.d(TAG,"Success");
-//            }
-//        }
-//        Saveutility saveutility = new Saveutility();
-//        saveutility.execute();
-//
-//    }
+
 }
+
+
+

@@ -42,6 +42,7 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
     SearchView searchView;
     Spinner spinner;
     EditText plate_no;
+    String plateNo, amountPayable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +159,7 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
         payDialog(county.getCountyName());
     }
 
-    void payDialog(String county) {
+    void payDialog(final String county) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ActivityCountyServices.this);
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -169,7 +170,7 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
         ;
         Button pay, cancel;
 
-        TextView bill_name = dialogView.findViewById(R.id.bill_name);
+        final TextView bill_name = dialogView.findViewById(R.id.bill_name);
         bill_name.setText(county);
 
         spinner = dialogView.findViewById(R.id.spinner);
@@ -204,25 +205,85 @@ public class ActivityCountyServices extends AppCompatActivity implements CountyS
                 } else {
                     amount.setError(null);
                 }
-
+                plateNo=plate_no.getText().toString();
+                amountPayable=amount.getText().toString();
                 /*TODO: HOVER STUFF GOES HERE*/
-                //nairobi
-//                switch (countyName) {
-//                    case "I&M Bank":
-//                        Intent iandmbank = new HoverParameters.Builder(getApplicationContext())
-//                                //.extra("", "")
-//                                .request("741e5e8f")
-//                                .extra("kplcpaybill", "888880")
-//                                .extra("accountnumber", "account_no")
-//                                .extra("amount", "number")
-//                                .buildIntent();
-//                        startActivityForResult(iandmbank, 0);
-//                        break;
-                //kiambu
-                //nyeri
-                //mombasa
-                //nakuru
-                //kakamega
+                //nairobi  9f83580c
+                switch (county) {
+                    case "Nairobi County":
+                        Intent iandmbank = new HoverParameters.Builder(getApplicationContext())
+                                //.extra("", "")
+                                .request("9f83580c")
+                                .extra("paybill", "542542")
+                                .extra("accountnumber", plateNo)
+                                .extra("amount", amountPayable)
+                                .buildIntent();
+                        startActivityForResult(iandmbank, 0);
+                        alertDialog.dismiss();
+                        break;
+                    case "Kiambu County":
+                        Intent kcbbank = new HoverParameters.Builder(getApplicationContext())
+                                //.extra("", "")
+                                .request("a1bbac25")
+                                .extra("paybill", "522522")
+                                .extra("accountnumber", plateNo)
+                                .extra("amount", amountPayable)
+                                .buildIntent();
+                        startActivityForResult(kcbbank, 0);
+                        alertDialog.dismiss();
+                        break;
+                    case "Nyeri County":
+                        Intent equitybank = new HoverParameters.Builder(getApplicationContext())
+                                //.extra("", "")
+                                .request("881ff54c")
+                                .extra("paybill", "247247")
+                                .extra("accountnumber", plateNo)
+                                .extra("amount", amountPayable)
+                                .buildIntent();
+                        startActivityForResult(equitybank, 0);
+                        alertDialog.dismiss();
+                        break;
+                    case "Mombasa County":
+                        Intent gotvpayment = new HoverParameters.Builder(getApplicationContext())
+                                //.extra("", "")
+                                .request("2c0c2c78")
+                                .extra("paybill", "329329")
+                                .extra("accountnumber", plateNo)
+                                .extra("amount", amountPayable)
+                                .setEnvironment(HoverParameters.DEBUG_ENV)
+                                .buildIntent();
+                        startActivityForResult(gotvpayment, 0);
+                        alertDialog.dismiss();
+                        break;
+                    case "Nakuru County":
+                        Intent starttimespayment = new HoverParameters.Builder(getApplicationContext())
+                                //.extra("", "")
+                                .request("5520c254")
+                                .extra("paybill", "5520c254")
+                                .extra("accountnumber", plateNo)
+                                .extra("amount", amountPayable)
+                                .buildIntent();
+                        startActivityForResult(starttimespayment, 0);
+                        alertDialog.dismiss();
+                        break;
+                    case "Kakamega County":
+                        Intent rentpayment = new HoverParameters.Builder(getApplicationContext())
+                                //.extra("", "")
+                                .request("ee0905b7")
+                                .extra("paybill", "523500")
+                                .extra("accountnumber", plateNo)
+                                .extra("amount", amountPayable)
+                                .buildIntent();
+                        startActivityForResult(rentpayment, 0);
+                        alertDialog.dismiss();
+                        break;
+
+                }
+                //kiambu  a1bbac25
+                //nyeri  881ff54c
+                //mombasa  2c0c2c78
+                //nakuru 5520c254
+                //kakamega ee0905b7
 
 
 
