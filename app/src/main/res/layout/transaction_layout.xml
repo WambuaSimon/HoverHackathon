@@ -8,14 +8,14 @@
         android:elevation="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp">
+     >
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:weightSum="1"
-        android:padding="@dimen/_5sdp"
+        android:padding="@dimen/_3sdp"
         android:layout_height="wrap_content">
 
     <ImageView android:layout_width="0dp"
@@ -40,7 +40,7 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/alice"
                 android:text="NHIF"
-                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textAppearance="?attr/textAppearanceHeadline2"
                 android:textColor="@android:color/black"
               />
 

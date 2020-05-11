@@ -12,9 +12,11 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.ActivityTransactionSummary">
+
+        </activity>
         <activity android:name=".ui.activity.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,9 +55,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.ActivityUtility" />
         </activity>
-        <activity android:name=".ui.activity.DashboardActivity">
-
-        </activity>
+        <activity android:name=".ui.activity.DashboardActivity"></activity>
         <activity android:name=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

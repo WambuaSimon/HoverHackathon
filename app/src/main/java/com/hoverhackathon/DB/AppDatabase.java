@@ -15,7 +15,7 @@ import com.hoverhackathon.Dao.TransactionDAO;
 import com.hoverhackathon.Message;
 import com.hoverhackathon.model.TransactionModel;
 
-@Database(entities = {Message.class, TransactionModel.class}, version = 6,exportSchema = false)
+@Database(entities = {Message.class, TransactionModel.class}, version = 7,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "message_db";
