@@ -1,6 +1,7 @@
 package com.hoverhackathon.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -10,15 +11,19 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.hoverhackathon.MainActivity;
 import com.hoverhackathon.R;
 
 public class DashboardActivity extends AppCompatActivity {
     CardView utility, banks_sacco, county, gvt, promo;
-//    int REQUEST_CODE_ASK_PERMISSIONS = 100;
+
+    //    int REQUEST_CODE_ASK_PERMISSIONS = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
         if (MyVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
             if (!checkIfAlreadyhavePermission()) {
                 requestForSpecificPermission();
-            }else{
+            } else {
 //                finish();
             }
         }
@@ -52,6 +57,10 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     void init() {
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         promo = findViewById(R.id.promo);
         gvt = findViewById(R.id.gvt);
         county = findViewById(R.id.county);
@@ -92,5 +101,27 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.transactions: {
+                Intent intent = new Intent(getApplicationContext(), ActivityTransactionSummary.class);
+
+                startActivity(intent);
+                break;
+            }
+            // case blocks for other MenuItems (if any)
+        }
+        return true;
     }
 }

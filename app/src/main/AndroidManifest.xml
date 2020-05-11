@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.ActivityTransactionSummary">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.DashboardActivity" />
 
         </activity>
         <activity android:name=".ui.activity.Splash">
