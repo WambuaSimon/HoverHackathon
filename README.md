@@ -11,5 +11,6 @@ USSD intergrations in Android app.  The app constists of various categories i.e:
 The last feature is a bonus feature which lets users unsubscribe from receiving spam messages 
 
 #Running the APP
+
 To install the app,ensure your phone has a safaricom sim card.
 Install the APK then grant permission to View Messages.
