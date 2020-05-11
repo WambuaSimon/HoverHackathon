@@ -61,6 +61,7 @@ public class DashboardActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         promo = findViewById(R.id.promo);
         gvt = findViewById(R.id.gvt);
         county = findViewById(R.id.county);
@@ -104,24 +105,24 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.transactions: {
-                Intent intent = new Intent(getApplicationContext(), ActivityTransactionSummary.class);
-
-                startActivity(intent);
-                break;
-            }
-            // case blocks for other MenuItems (if any)
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        return true;
+//
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.transactions: {
+//                Intent intent = new Intent(getApplicationContext(), ActivityTransactionSummary.class);
+//
+//                startActivity(intent);
+//                break;
+//            }
+//            // case blocks for other MenuItems (if any)
+//        }
+//        return true;
+//    }
 }
