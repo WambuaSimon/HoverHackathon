@@ -6,7 +6,8 @@
 
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -46,16 +47,16 @@
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     />
 
-                <ImageView
-                    android:id="@+id/toolbar_image"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="@dimen/_50sdp"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@null"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/logo" />
+                    <ImageView
+                        android:id="@+id/toolbar_image"
+                        android:layout_width="86dp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@null"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/logo" />
 
                     <TextView
 

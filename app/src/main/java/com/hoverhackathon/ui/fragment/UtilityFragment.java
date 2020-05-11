@@ -32,6 +32,7 @@ public class UtilityFragment extends Fragment {
     LinearLayout sgr, buupass;
     View view;
     String accountnumber, amount;
+
     public UtilityFragment() {
         // Required empty public constructor
     }
@@ -119,12 +120,8 @@ public class UtilityFragment extends Fragment {
         bonga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Proceed with pay with bonga", Toast.LENGTH_SHORT).show();
-                Intent payWithBonga = new HoverParameters.Builder(getContext())
-                        //.extra("", "")
-                        .request("def448ba")
-                        .buildIntent();
-                startActivityForResult(payWithBonga, 0);
+                payDialog("PayWithBonga");
+//
             }
         });
     }
@@ -178,9 +175,9 @@ public class UtilityFragment extends Fragment {
                         Intent kplcprepaid = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("afdccceb")
-                                .extra("paybill","888880")
-                                .extra("accountnumber",accountnumber)
-                                .extra("amount",amount)
+                                .extra("paybill", "888880")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(kplcprepaid, 0);
                         alertDialog.dismiss();
@@ -189,9 +186,9 @@ public class UtilityFragment extends Fragment {
                         Intent dstvpayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("9a41e022")
-                                .extra("paybill","444900")
-                                .extra("accountnumber",accountnumber)
-                                .extra("amount",amount)
+                                .extra("paybill", "444900")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(dstvpayment, 0);
                         alertDialog.dismiss();
@@ -200,9 +197,9 @@ public class UtilityFragment extends Fragment {
                         Intent zukupayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("a725648a")
-                                .extra("paybill","320323")
-                                .extra("accountnumber",accountnumber)
-                                .extra("amount",amount)
+                                .extra("paybill", "320323")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(zukupayment, 0);
                         alertDialog.dismiss();
@@ -211,9 +208,9 @@ public class UtilityFragment extends Fragment {
                         Intent gotvpayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("52cf4887")
-                                .extra("paybill","423655")
-                                .extra("accountnumber",accountnumber)
-                                .extra("amount",amount)
+                                .extra("paybill", "423655")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(gotvpayment, 0);
                         alertDialog.dismiss();
@@ -222,9 +219,9 @@ public class UtilityFragment extends Fragment {
                         Intent starttimespayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("def448ba")
-                                .extra("paybill","585858")
-                                .extra("accountnumber",accountnumber)
-                                .extra("amount",amount)
+                                .extra("paybill", "585858")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(starttimespayment, 0);
                         alertDialog.dismiss();
@@ -233,9 +230,9 @@ public class UtilityFragment extends Fragment {
                         Intent rentpayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("4310a43b")
-                                .extra("paybill","247247")
-                                .extra("accountnumber",accountnumber)
-                                .extra("amount",amount)
+                                .extra("paybill", "247247")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(rentpayment, 0);
                         alertDialog.dismiss();
@@ -244,20 +241,30 @@ public class UtilityFragment extends Fragment {
                         Intent madarakaexpresspayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("4c65b52c")
-                                .extra("paybill","809888 ")
-                                .extra("accountnumber",accountnumber)
-                                .extra("amount",amount)
+                                .extra("paybill", "809888 ")
+                                .extra("accountnumber", accountnumber)
+                                .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(madarakaexpresspayment, 0);
                         alertDialog.dismiss();
-                       break;
-                    case"BuuPass":
+                        break;
+                    case "BuuPass":
                         Intent buupasspayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
                                 .request("112c155a")
                                 .buildIntent();
                         startActivityForResult(buupasspayment, 0);
                         alertDialog.dismiss();
+                        break;
+
+                    case "PayWithBonga":
+                        Toast.makeText(getActivity(), "Enter till number and amount.", Toast.LENGTH_SHORT).show();
+                        Intent payWithBonga = new HoverParameters.Builder(getContext())
+                                .extra("tillnumber", accountnumber)
+                                .extra("amount", amount)
+                                .request("cff6d52c")
+                                .buildIntent();
+                        startActivityForResult(payWithBonga, 0);
                         break;
 
                 }
