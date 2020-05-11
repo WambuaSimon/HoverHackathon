@@ -19,31 +19,39 @@ public class TransactionReceiver extends BroadcastReceiver {
 
         //this.context=cont;
     }
-    String actionName,convtimeStamp;
+
+    String actionName, convtimeStamp;
     long timeStamp;
     String error;
+
     @Override
     public void onReceive(final Context context, Intent intent) {
-        String uuid = intent.getStringExtra("uuid");
-         actionName=intent.getStringExtra("action_name");
-       //  timeStamp=intent.getLongExtra("request_timestamp");
-         timeStamp=intent.getLongExtra("request_timestamp", 0);
-          convtimeStamp="" +timeStamp;
-         error=intent.getStringExtra("error");
-        String confirmationCode, balance;
         if (intent.hasExtra("parsed_variables")) {
             HashMap<String, String> parsed_variables = (HashMap<String, String>) intent.getSerializableExtra("parsed_variables");
-            if (parsed_variables.containsKey("confirmCode"))
-                confirmationCode = parsed_variables.get("confirmCode");
-            if (parsed_variables.containsKey("balance"))
-                balance = parsed_variables.get("balance");
+            if (parsed_variables.containsKey("confirmed"))
+                Toast.makeText(context, "Confirmed found", Toast.LENGTH_SHORT).show();
+            //   confirmationCode = parsed_variables.get("confirmCode");
+            if (parsed_variables.containsKey("lockdown"))
+                Toast.makeText(context, "Lockdown found", Toast.LENGTH_SHORT).show();
+            // balance = parsed_variables.get("balance");
+            if (parsed_variables.containsKey("Failed"))
+                Toast.makeText(context, "Failed found", Toast.LENGTH_SHORT).show();
+            // balance = parsed_variables.get("balance");
+        String uuid = intent.getStringExtra("uuid");
+        actionName = intent.getStringExtra("action_name");
+        //  timeStamp=intent.getLongExtra("request_timestamp");
+        timeStamp = intent.getLongExtra("request_timestamp", 0);
+        convtimeStamp = "" + timeStamp;
+        error = intent.getStringExtra("error");
+        String confirmationCode, balance;
+
         }
 
 
     }
 
-    void saveUtility(final String name, final String status, final String timestamp){
-        class Saveutility extends AsyncTask<Void,Void,Void> {
+    void saveUtility(final String name, final String status, final String timestamp) {
+        class Saveutility extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -63,7 +71,7 @@ public class TransactionReceiver extends BroadcastReceiver {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Log.d(TAG,"Success");
+                Log.d(TAG, "Success");
             }
         }
         Saveutility saveutility = new Saveutility();
