@@ -25,10 +25,13 @@ import androidx.core.content.ContextCompat;
 import com.hover.sdk.api.Hover;
 import com.hover.sdk.api.HoverParameters;
 import com.hoverhackathon.DB.AppDatabase;
+import com.hoverhackathon.ui.activity.DashboardActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import es.dmoral.toasty.Toasty;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_SMS;
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Log.d("recordsStored", String.valueOf(recordsStored.size()));
-                List<String> messages=new ArrayList<>();
+                List<String> messages = new ArrayList<>();
                 Handler handler1 = new Handler();
                 for (int m = 0; m < recordsStored.size(); m++) {
                     Message msg = recordsStored.get(m);
@@ -105,35 +108,35 @@ public class MainActivity extends AppCompatActivity {
 //                        messages=recordsStored;
                         number = recordsStored.get(m).messageNumber.toLowerCase().trim();
                         messages.add(msgList.getMessageNumber());
-                        for(int n=0; n<messages.size()-1;n++){
+                        for (int n = 0; n < messages.size(); n++) {
 
-                            Log.d("recordsStored", messages.toString());
-                            int times=messages.size();
-                            for(int i=0;i<times;++i){
-                            Intent unsubscribe = new HoverParameters.Builder(getApplicationContext())
-                                    //.extra("", "")
-                                    .request("1a5963da")
-                                    .extra("SenderName", messages.get(n))
-                                    //.setEnvironment(HoverParameters.DEBUG_ENV)
-                                    .buildIntent();
-                            startActivityForResult(unsubscribe, 0);
+                            Log.d("recordsStored", messages.get(n));
+                            int times = messages.size();
+                            for (int i = 0; i < times; ++i) {
+                                Intent unsubscribe = new HoverParameters.Builder(getApplicationContext())
+                                        //.extra("", "")
+                                        .request("1a5963da")
+                                        .extra("SenderName", messages.get(n))
+                                        //.setEnvironment(HoverParameters.DEBUG_ENV)
+                                        .buildIntent();
+                                startActivityForResult(unsubscribe, 0);
+                            }
+
                         }
-                        }
+
+                        Log.d("recordsStored", number);
+                        updateTask(msgList);
+                        recordsStored.remove(m--);
+                        messageListAdapter.notifyDataSetChanged();
 
 
-
-                    //    Log.d("recordsStored", number);
-//                        updateTask(msgList);
-//                        recordsStored.remove(m--);
-//                        messageListAdapter.notifyDataSetChanged();
                         /*TODO: after unsubscribing, update ROOM DB with status ==1, then remove item from list view */
 
 
-                        }
-
                     }
-
                 }
+
+            }
 
         });
 
@@ -153,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
 //                Log.d("Update Message", "Success");
+
             }
         }
         UpdateMessage ut = new UpdateMessage();

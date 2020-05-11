@@ -90,7 +90,7 @@ public class MessageListAdapter extends BaseAdapter {
                         holder.check.setChecked(false);
                         messageListArray.get(position).isChecked = false;
 //                        Toast.makeText(ctx, "Max limit reached", Toast.LENGTH_SHORT).show();
-                        Toasty.warning(ctx,"Select one address ata a time",Toasty.LENGTH_SHORT).show();
+                        Toasty.warning(ctx,"Select one address at a time",Toasty.LENGTH_SHORT).show();
                     }
                 }
                     else {

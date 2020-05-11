@@ -190,12 +190,13 @@ public class BanksSaccosFragment extends Fragment {
                     case "Sheria Sacco":
                         Intent starttimespayment = new HoverParameters.Builder(getContext())
                                 //.extra("", "")
-                                .request("72c32867")
+                                .request("def448ba")
                                 .extra("paybill", "964700")
                                 .extra("accountnumber", accountnumber)
                                 .extra("amount", amount)
                                 .buildIntent();
                         startActivityForResult(starttimespayment, 0);
+
                         alertDialog.dismiss();
                         break;
                     case "Stima Sacco":
